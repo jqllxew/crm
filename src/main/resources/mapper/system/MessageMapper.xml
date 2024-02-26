@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhidi.crm.system.mapper.MessageMapper">
+  <resultMap id="BaseResultMap" type="com.zhidi.crm.system.entity.Message">
+    <id column="MESSAGEID" jdbcType="VARCHAR" property="messageid" />
+    <result column="TOUSERID" jdbcType="VARCHAR" property="touserid" />
+    <result column="FROMUSERID" jdbcType="VARCHAR" property="fromuserid" />
+    <result column="READTIME" jdbcType="TIMESTAMP" property="readtime" />
+    <result column="SENDTIME" jdbcType="TIMESTAMP" property="sendtime" />
+    <result column="STATUS" jdbcType="DECIMAL" property="status" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zhidi.crm.system.entity.Message">
+    <result column="CONTENT" jdbcType="CLOB" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    MESSAGEID, TOUSERID, FROMUSERID, READTIME, SENDTIME, STATUS
+  </sql>
+  <sql id="Blob_Column_List">
+    CONTENT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from TB_CRM_MESSAGE
+    where MESSAGEID = #{messageid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB_CRM_MESSAGE
+    where MESSAGEID = #{messageid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhidi.crm.system.entity.Message">
+  <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+    select sys_guid() from dual
+  </selectKey>
+    insert into TB_CRM_MESSAGE (MESSAGEID, TOUSERID, FROMUSERID, 
+      READTIME, SENDTIME, STATUS, 
+      CONTENT)
+    values (#{messageid,jdbcType=VARCHAR}, #{touserid,jdbcType=VARCHAR}, #{fromuserid,jdbcType=VARCHAR}, 
+      #{readtime,jdbcType=TIMESTAMP}, #{sendtime,jdbcType=TIMESTAMP}, #{status,jdbcType=DECIMAL}, 
+      #{content,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhidi.crm.system.entity.Message">
+  <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+    select sys_guid() from dual
+  </selectKey>
+    insert into TB_CRM_MESSAGE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="messageid != null">
+        MESSAGEID,
+      </if>
+      <if test="touserid != null">
+        TOUSERID,
+      </if>
+      <if test="fromuserid != null">
+        FROMUSERID,
+      </if>
+      <if test="readtime != null">
+        READTIME,
+      </if>
+      <if test="sendtime != null">
+        SENDTIME,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="content != null">
+        CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="messageid != null">
+        #{messageid,jdbcType=VARCHAR},
+      </if>
+      <if test="touserid != null">
+        #{touserid,jdbcType=VARCHAR},
+      </if>
+      <if test="fromuserid != null">
+        #{fromuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="readtime != null">
+        #{readtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendtime != null">
+        #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhidi.crm.system.entity.Message">
+    update TB_CRM_MESSAGE
+    <set>
+      <if test="touserid != null">
+        TOUSERID = #{touserid,jdbcType=VARCHAR},
+      </if>
+      <if test="fromuserid != null">
+        FROMUSERID = #{fromuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="readtime != null">
+        READTIME = #{readtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendtime != null">
+        SENDTIME = #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="content != null">
+        CONTENT = #{content,jdbcType=CLOB},
+      </if>
+    </set>
+    where MESSAGEID = #{messageid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zhidi.crm.system.entity.Message">
+    update TB_CRM_MESSAGE
+    set TOUSERID = #{touserid,jdbcType=VARCHAR},
+      FROMUSERID = #{fromuserid,jdbcType=VARCHAR},
+      READTIME = #{readtime,jdbcType=TIMESTAMP},
+      SENDTIME = #{sendtime,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=DECIMAL},
+      CONTENT = #{content,jdbcType=CLOB}
+    where MESSAGEID = #{messageid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhidi.crm.system.entity.Message">
+    update TB_CRM_MESSAGE
+    set TOUSERID = #{touserid,jdbcType=VARCHAR},
+      FROMUSERID = #{fromuserid,jdbcType=VARCHAR},
+      READTIME = #{readtime,jdbcType=TIMESTAMP},
+      SENDTIME = #{sendtime,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=DECIMAL}
+    where MESSAGEID = #{messageid,jdbcType=VARCHAR}
+  </update>
+  <select id="findByPage" resultMap="BaseResultMap">
+    select
+      tcm.messageid,
+      tsu.username touserid,
+      tsu2.username fromuserid,
+      tcm.content,
+      tcm.readtime,
+      tcm.sendtime,
+      tcm.status
+    from
+      TB_CRM_MESSAGE tcm
+        left join
+      TB_SYSTEM_USER tsu
+      on tcm.touserid = tsu.id
+        left join
+      TB_SYSTEM_USER tsu2
+      on tcm.fromuserid = tsu2.id
+    limit #{pager.limits},#{pager.rows}
+  </select>
+  <select id="getCount" resultType="integer">
+  	select
+  		count(1)
+  	from
+  		TB_CRM_MESSAGE
+  </select>
+</mapper>

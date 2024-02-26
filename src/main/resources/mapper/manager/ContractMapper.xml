@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhidi.crm.manager.mapper.ContractMapper">
+  <resultMap id="BaseResultMap" type="com.zhidi.crm.manager.entity.Contract">
+    <id column="CONTRACTID" jdbcType="VARCHAR" property="contractid" />
+    <result column="CONTRACTNUMBER" jdbcType="VARCHAR" property="contractnumber" />
+    <result column="BUSINESSID" jdbcType="VARCHAR" property="businessid" />
+    <result column="PRICE" jdbcType="DECIMAL" property="price" />
+    <result column="DUETIME" jdbcType="TIMESTAMP" property="duetime" />
+    <result column="OWNERUSERID" jdbcType="VARCHAR" property="owneruserid" />
+    <result column="CREATORUSERID" jdbcType="VARCHAR" property="creatoruserid" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="UPDATETIME" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="STARTDATE" jdbcType="TIMESTAMP" property="startdate" />
+    <result column="ENDDATE" jdbcType="TIMESTAMP" property="enddate" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="ISDELETED" jdbcType="DECIMAL" property="isdeleted" />
+    <result column="DELETEUSERID" jdbcType="VARCHAR" property="deleteuserid" />
+    <result column="DELETETIME" jdbcType="TIMESTAMP" property="deletetime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zhidi.crm.manager.entity.Contract">
+    <result column="CONTRACTCONTENT" jdbcType="BLOB" property="contractcontent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CONTRACTID, CONTRACTNUMBER, BUSINESSID, PRICE, DUETIME, OWNERUSERID, CREATORUSERID, 
+    DESCRIPTION, CREATETIME, UPDATETIME, STARTDATE, ENDDATE, STATUS, ISDELETED, DELETEUSERID, 
+    DELETETIME
+  </sql>
+  <sql id="Blob_Column_List">
+    CONTRACTCONTENT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from TB_CRM_CONTRACT
+    where CONTRACTID = #{contractid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB_CRM_CONTRACT
+    where CONTRACTID = #{contractid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhidi.crm.manager.entity.Contract">
+  <selectKey keyProperty="contractid" resultType="java.lang.String" order="BEFORE">
+    select sys_guid() from dual 
+  </selectKey>
+    insert into TB_CRM_CONTRACT (CONTRACTID, CONTRACTNUMBER, BUSINESSID, 
+      PRICE, DUETIME, OWNERUSERID, 
+      CREATORUSERID, DESCRIPTION, CREATETIME, 
+      UPDATETIME, STARTDATE, ENDDATE, 
+      STATUS, ISDELETED, DELETEUSERID, 
+      DELETETIME, CONTRACTCONTENT)
+    values (#{contractid,jdbcType=VARCHAR}, #{contractnumber,jdbcType=VARCHAR}, #{businessid,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DECIMAL}, #{duetime,jdbcType=TIMESTAMP}, #{owneruserid,jdbcType=VARCHAR}, 
+      #{creatoruserid,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{startdate,jdbcType=TIMESTAMP}, #{enddate,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=VARCHAR}, #{isdeleted,jdbcType=DECIMAL}, #{deleteuserid,jdbcType=VARCHAR}, 
+      #{deletetime,jdbcType=TIMESTAMP}, #{contractcontent,jdbcType=BLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhidi.crm.manager.entity.Contract">
+  <selectKey keyProperty="contractid" resultType="java.lang.String" order="BEFORE">
+    select sys_guid() from dual
+  </selectKey>
+    insert into TB_CRM_CONTRACT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contractid != null">
+        CONTRACTID,
+      </if>
+      <if test="contractnumber != null">
+        CONTRACTNUMBER,
+      </if>
+      <if test="businessid != null">
+        BUSINESSID,
+      </if>
+      <if test="price != null">
+        PRICE,
+      </if>
+      <if test="duetime != null">
+        DUETIME,
+      </if>
+      <if test="owneruserid != null">
+        OWNERUSERID,
+      </if>
+      <if test="creatoruserid != null">
+        CREATORUSERID,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+      <if test="createtime != null">
+        CREATETIME,
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME,
+      </if>
+      <if test="startdate != null">
+        STARTDATE,
+      </if>
+      <if test="enddate != null">
+        ENDDATE,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="isdeleted != null">
+        ISDELETED,
+      </if>
+      <if test="deleteuserid != null">
+        DELETEUSERID,
+      </if>
+      <if test="deletetime != null">
+        DELETETIME,
+      </if>
+      <if test="contractcontent != null">
+        CONTRACTCONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contractid != null">
+        #{contractid,jdbcType=VARCHAR},
+      </if>
+      <if test="contractnumber != null">
+        #{contractnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="businessid != null">
+        #{businessid,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="duetime != null">
+        #{duetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="owneruserid != null">
+        #{owneruserid,jdbcType=VARCHAR},
+      </if>
+      <if test="creatoruserid != null">
+        #{creatoruserid,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startdate != null">
+        #{startdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="isdeleted != null">
+        #{isdeleted,jdbcType=DECIMAL},
+      </if>
+      <if test="deleteuserid != null">
+        #{deleteuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="deletetime != null">
+        #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contractcontent != null">
+        #{contractcontent,jdbcType=BLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhidi.crm.manager.entity.Contract">
+    update TB_CRM_CONTRACT
+    <set>
+      <if test="contractnumber != null">
+        CONTRACTNUMBER = #{contractnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="businessid != null">
+        BUSINESSID = #{businessid,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        PRICE = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="duetime != null">
+        DUETIME = #{duetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="owneruserid != null">
+        OWNERUSERID = #{owneruserid,jdbcType=VARCHAR},
+      </if>
+      <if test="creatoruserid != null">
+        CREATORUSERID = #{creatoruserid,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startdate != null">
+        STARTDATE = #{startdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enddate != null">
+        ENDDATE = #{enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="isdeleted != null">
+        ISDELETED = #{isdeleted,jdbcType=DECIMAL},
+      </if>
+      <if test="deleteuserid != null">
+        DELETEUSERID = #{deleteuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="deletetime != null">
+        DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contractcontent != null">
+        CONTRACTCONTENT = #{contractcontent,jdbcType=BLOB},
+      </if>
+    </set>
+    where CONTRACTID = #{contractid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zhidi.crm.manager.entity.Contract">
+    update TB_CRM_CONTRACT
+    set CONTRACTNUMBER = #{contractnumber,jdbcType=VARCHAR},
+      BUSINESSID = #{businessid,jdbcType=VARCHAR},
+      PRICE = #{price,jdbcType=DECIMAL},
+      DUETIME = #{duetime,jdbcType=TIMESTAMP},
+      OWNERUSERID = #{owneruserid,jdbcType=VARCHAR},
+      CREATORUSERID = #{creatoruserid,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      STARTDATE = #{startdate,jdbcType=TIMESTAMP},
+      ENDDATE = #{enddate,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=VARCHAR},
+      ISDELETED = #{isdeleted,jdbcType=DECIMAL},
+      DELETEUSERID = #{deleteuserid,jdbcType=VARCHAR},
+      DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+      CONTRACTCONTENT = #{contractcontent,jdbcType=BLOB}
+    where CONTRACTID = #{contractid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhidi.crm.manager.entity.Contract">
+    update TB_CRM_CONTRACT
+    set CONTRACTNUMBER = #{contractnumber,jdbcType=VARCHAR},
+      BUSINESSID = #{businessid,jdbcType=VARCHAR},
+      PRICE = #{price,jdbcType=DECIMAL},
+      DUETIME = #{duetime,jdbcType=TIMESTAMP},
+      OWNERUSERID = #{owneruserid,jdbcType=VARCHAR},
+      CREATORUSERID = #{creatoruserid,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      STARTDATE = #{startdate,jdbcType=TIMESTAMP},
+      ENDDATE = #{enddate,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=VARCHAR},
+      ISDELETED = #{isdeleted,jdbcType=DECIMAL},
+      DELETEUSERID = #{deleteuserid,jdbcType=VARCHAR},
+      DELETETIME = #{deletetime,jdbcType=TIMESTAMP}
+    where CONTRACTID = #{contractid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPager" resultMap="BaseResultMap">
+  select
+    contractid,
+    contractnumber,
+    businessid,
+    price,
+    duetime,
+    owneruserid,
+    creatoruserid,
+    description,
+    createtime,
+    updatetime,
+    startdate,
+    enddate,
+    status,
+    isdeleted,
+    deleteuserid,
+    deletetime,
+    contractcontent
+  from tb_crm_contract
+  limit #{pager.limits}.#{pager.rows}
+  </select>
+  <select id="conut" resultType="integer">
+          select
+              count(1)
+          from tb_crm_contract
+  </select>
+  <delete id="deleteByPrimary">
+          delete
+              from  tb_crm_contract
+          where 
+              contractid in
+          <foreach collection="s" item="id" open="(" separator="," close=")">
+              #{id}
+          </foreach>           
+  </delete>
+</mapper>

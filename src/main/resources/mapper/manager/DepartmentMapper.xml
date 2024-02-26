@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhidi.crm.manager.mapper.DepartmentMapper">
+  <resultMap id="BaseResultMap" type="com.zhidi.crm.manager.entity.Department">
+    <id column="DEPARTMENTID" jdbcType="VARCHAR" property="departmentid" />
+    <result column="PARENTID" jdbcType="VARCHAR" property="parentid" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    DEPARTMENTID, PARENTID, NAME, DESCRIPTION
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_CRM_DEPARTMENT
+    where DEPARTMENTID = #{departmentid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB_CRM_DEPARTMENT
+    where DEPARTMENTID = #{departmentid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhidi.crm.manager.entity.Department">
+  <selectKey keyProperty="departmentid" resultType="java.lang.String" order="BEFORE">
+    select replace(uuid(),'-','') uuid from dual
+  </selectKey>
+    insert into TB_CRM_DEPARTMENT (DEPARTMENTID, PARENTID, NAME, 
+      DESCRIPTION)
+    values (#{departmentid,jdbcType=VARCHAR}, #{parentid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhidi.crm.manager.entity.Department">
+  <selectKey keyProperty="departmentid" resultType="java.lang.String" order="BEFORE">
+    select replace(uuid(),'-','') uuid from dual
+  </selectKey>
+    insert into TB_CRM_DEPARTMENT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="departmentid != null">
+        DEPARTMENTID,
+      </if>
+      <if test="parentid != null">
+        PARENTID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="departmentid != null">
+        #{departmentid,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null">
+        #{parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhidi.crm.manager.entity.Department">
+    update TB_CRM_DEPARTMENT
+    <set>
+      <if test="parentid != null">
+        PARENTID = #{parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DEPARTMENTID = #{departmentid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhidi.crm.manager.entity.Department">
+    update TB_CRM_DEPARTMENT
+    set PARENTID = #{parentid,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR}
+    where DEPARTMENTID = #{departmentid,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="count" resultType="Integer">
+  	 select count(1) from TB_CRM_EMPLOYEE
+  	  <where>
+	      <if test="params.name1!=null and params.name1!=''">
+	      <bind name="bl" value="'%'+_parameter.params.name1+'%'"/>
+	 		and name like #{bl}
+	 	</if>
+	 	<if test="params.name2!=null and params.name2!=''">
+	      <bind name="bk" value="'%'+_parameter.params.name2+'%'"/>
+	 		and name like #{bk}
+	 	</if>
+	    </where>
+  </select>
+  	<select id="selectByDeptPage" resultType="com.zhidi.crm.manager.entity.vo.DepartmentVo">
+	  	select  
+	  		departmentid,
+	        dname,
+	        parentname,
+	        description 
+	    from
+	        (select 
+	            d.departmentid,
+	            d.name dname,
+	            p.name parentname,
+	            d.description
+	        from tb_crm_department d
+	        left join tb_crm_department p
+	        on d.parentid = p.departmentid 
+	       	 <where>
+		      	 <if test="params.name!=null and params.name!=''">
+	      <bind name="bk1" value="'%'+_parameter.params.name+'%'"/>
+	 		and d.name like #{bk1}
+	 	</if>
+	 	<if test="params.pname!=null and params.pname!=''">
+	      <bind name="bk2" value="'%'+_parameter.params.pname+'%'"/>
+	 		and p.name like #{bk2}
+	 	</if>
+		   	 </where>
+	      		) pd
+	    limit #{firstResult},#{maxResult}
+  	</select>
+  	<select id="selectByData" resultMap="BaseResultMap">
+  		select  distinct departmentid,name from TB_CRM_department
+  	</select>
+  	<select id="selectByname" resultMap="BaseResultMap">
+  		select name from tb_crm_department where name =#{name}
+  	</select>
+  	
+</mapper>

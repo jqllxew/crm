@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhidi.crm.manager.mapper.ProductMapper">
+  <resultMap id="BaseResultMap" type="com.zhidi.crm.manager.entity.Product">
+    <id column="PRODUCTID" jdbcType="VARCHAR" property="productid" />
+    <result column="CATEGORYID" jdbcType="VARCHAR" property="categoryid" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="CREATORUSERID" jdbcType="VARCHAR" property="creatoruserid" />
+    <result column="COSTPRICE" jdbcType="DECIMAL" property="costprice" />
+    <result column="SUGGESTEDPRICE" jdbcType="DECIMAL" property="suggestedprice" />
+    <result column="DEVELOPMENTTEAM" jdbcType="VARCHAR" property="developmentteam" />
+    <result column="DEVELOPMENTTIME" jdbcType="TIMESTAMP" property="developmenttime" />
+    <result column="LINK" jdbcType="VARCHAR" property="link" />
+    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="UPDATETIME" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    PRODUCTID, CATEGORYID, NAME, CREATORUSERID, COSTPRICE, SUGGESTEDPRICE, DEVELOPMENTTEAM, 
+    DEVELOPMENTTIME, LINK, CREATETIME, UPDATETIME, DESCRIPTION
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_CRM_PRODUCT
+    where PRODUCTID = #{productid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB_CRM_PRODUCT
+    where PRODUCTID = #{productid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhidi.crm.manager.entity.Product">
+  <selectKey keyProperty="productid" resultType="java.lang.String" order="BEFORE">
+    select sys_guid() from dual
+  </selectKey>
+    insert into TB_CRM_PRODUCT (PRODUCTID, CATEGORYID, NAME, 
+      CREATORUSERID, COSTPRICE, SUGGESTEDPRICE, 
+      DEVELOPMENTTEAM, DEVELOPMENTTIME, LINK, 
+      CREATETIME, UPDATETIME, DESCRIPTION
+      )
+    values (#{productid,jdbcType=VARCHAR}, #{categoryid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{creatoruserid,jdbcType=VARCHAR}, #{costprice,jdbcType=DECIMAL}, #{suggestedprice,jdbcType=DECIMAL}, 
+      #{developmentteam,jdbcType=VARCHAR}, #{developmenttime,jdbcType=TIMESTAMP}, #{link,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhidi.crm.manager.entity.Product">
+  <selectKey keyProperty="productid" resultType="java.lang.String" order="BEFORE">
+    select sys_guid() from dual
+  </selectKey>
+    insert into TB_CRM_PRODUCT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productid != null">
+        PRODUCTID,
+      </if>
+      <if test="categoryid != null">
+        CATEGORYID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="creatoruserid != null">
+        CREATORUSERID,
+      </if>
+      <if test="costprice != null">
+        COSTPRICE,
+      </if>
+      <if test="suggestedprice != null">
+        SUGGESTEDPRICE,
+      </if>
+      <if test="developmentteam != null">
+        DEVELOPMENTTEAM,
+      </if>
+      <if test="developmenttime != null">
+        DEVELOPMENTTIME,
+      </if>
+      <if test="link != null">
+        LINK,
+      </if>
+      <if test="createtime != null">
+        CREATETIME,
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productid != null">
+        #{productid,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryid != null">
+        #{categoryid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="creatoruserid != null">
+        #{creatoruserid,jdbcType=VARCHAR},
+      </if>
+      <if test="costprice != null">
+        #{costprice,jdbcType=DECIMAL},
+      </if>
+      <if test="suggestedprice != null">
+        #{suggestedprice,jdbcType=DECIMAL},
+      </if>
+      <if test="developmentteam != null">
+        #{developmentteam,jdbcType=VARCHAR},
+      </if>
+      <if test="developmenttime != null">
+        #{developmenttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="link != null">
+        #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhidi.crm.manager.entity.Product">
+    update TB_CRM_PRODUCT
+    <set>
+      <if test="categoryid != null">
+        CATEGORYID = #{categoryid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="creatoruserid != null">
+        CREATORUSERID = #{creatoruserid,jdbcType=VARCHAR},
+      </if>
+      <if test="costprice != null">
+        COSTPRICE = #{costprice,jdbcType=DECIMAL},
+      </if>
+      <if test="suggestedprice != null">
+        SUGGESTEDPRICE = #{suggestedprice,jdbcType=DECIMAL},
+      </if>
+      <if test="developmentteam != null">
+        DEVELOPMENTTEAM = #{developmentteam,jdbcType=VARCHAR},
+      </if>
+      <if test="developmenttime != null">
+        DEVELOPMENTTIME = #{developmenttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="link != null">
+        LINK = #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PRODUCTID = #{productid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhidi.crm.manager.entity.Product">
+    update TB_CRM_PRODUCT
+    set CATEGORYID = #{categoryid,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      CREATORUSERID = #{creatoruserid,jdbcType=VARCHAR},
+      COSTPRICE = #{costprice,jdbcType=DECIMAL},
+      SUGGESTEDPRICE = #{suggestedprice,jdbcType=DECIMAL},
+      DEVELOPMENTTEAM = #{developmentteam,jdbcType=VARCHAR},
+      DEVELOPMENTTIME = #{developmenttime,jdbcType=TIMESTAMP},
+      LINK = #{link,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      DESCRIPTION = #{description,jdbcType=VARCHAR}
+    where PRODUCTID = #{productid,jdbcType=VARCHAR}
+  </update>
+  <select id="getCount" resultType="integer">
+  	select
+  		count(1)
+  	from
+  		TB_CRM_PRODUCT tcp
+  	left join
+  		TB_SYSTEM_USER tsu
+  	on
+  		tcp.creatoruserid = tsu.id
+  	<where>
+  		<if test="product.name != null">
+  			<bind name="name" value="'%'+_parameter.product.name+'%'"/>
+  			tcp.name like #{name}
+  		</if>
+  		<if test="product.suggestedprice != null">
+  			<bind name="suggestedprice" value="'%'+_parameter.product.suggestedprice+'%'"/>
+  			and tcp.suggestedprice like #{suggestedprice}
+  		</if>
+  	</where>
+  </select>
+  <select id="findByPage" resultMap="BaseResultMap">
+      select
+      tcp.productid,
+      tcp.name,
+      tcp.link,
+      tsu.username creatoruserid,
+      tcp.createtime,
+      tcp.updatetime,
+      tcp.costprice,
+      tcp.suggestedprice
+      from
+      TB_CRM_PRODUCT tcp
+      left join
+      TB_SYSTEM_USER tsu
+      on
+      tcp.creatoruserid = tsu.id
+      <where>
+          <if test="product.name != null">
+              <bind name="name" value="'%'+_parameter.product.name+'%'"/>
+              tcp.name like #{name} and
+          </if>
+          <if test="product.suggestedprice != null">
+              <bind name="suggestedprice" value="'%'+_parameter.product.suggestedprice+'%'"/>
+              tcp.suggestedprice like #{suggestedprice} and
+          </if>
+      </where>
+      limit #{pager.limits},#{pager.rows}
+  </select>
+  <delete id="deleteProduct">
+  	delete
+  		from
+  	TB_CRM_PRODUCT
+	where
+	productid in 
+	<foreach collection="ids" item="id" open="(" close=")" separator=",">
+		#{id}
+	</foreach>
+  </delete>
+  
+</mapper>

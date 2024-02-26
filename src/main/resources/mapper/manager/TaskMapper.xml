@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhidi.crm.manager.mapper.TaskMapper">
+  <resultMap id="BaseResultMap" type="com.zhidi.crm.manager.entity.Task">
+    <id column="TASKID" jdbcType="VARCHAR" property="taskid" />
+    <result column="OWNERUSERID" jdbcType="VARCHAR" property="owneruserid" />
+    <result column="ABOUT_USER" jdbcType="VARCHAR" property="aboutUser" />
+    <result column="SUBJECT" jdbcType="VARCHAR" property="subject" />
+    <result column="DUEDATE" jdbcType="TIMESTAMP" property="duedate" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="PRIORITY" jdbcType="VARCHAR" property="priority" />
+    <result column="SENDEMAIL" jdbcType="VARCHAR" property="sendemail" />
+    <result column="CREATORUSERID" jdbcType="VARCHAR" property="creatoruserid" />
+    <result column="CREATEDATE" jdbcType="TIMESTAMP" property="createdate" />
+    <result column="UPDTADATE" jdbcType="TIMESTAMP" property="updtadate" />
+    <result column="ISCLOSE" jdbcType="DECIMAL" property="isclose" />
+    <result column="ISDELETED" jdbcType="DECIMAL" property="isdeleted" />
+    <result column="DELETEUSERID" jdbcType="VARCHAR" property="deleteuserid" />
+    <result column="DELETETIME" jdbcType="TIMESTAMP" property="deletetime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zhidi.crm.manager.entity.Task">
+    <result column="DESCRIPTION" jdbcType="BLOB" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    TASKID, OWNERUSERID, ABOUT_USER, SUBJECT, DUEDATE, STATUS, PRIORITY, SENDEMAIL, CREATORUSERID, 
+    CREATEDATE, UPDTADATE, ISCLOSE, ISDELETED, DELETEUSERID, DELETETIME
+  </sql>
+  <sql id="Blob_Column_List">
+    DESCRIPTION
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from TB_CRM_TASK
+    where TASKID = #{taskid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB_CRM_TASK
+    where TASKID = #{taskid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhidi.crm.manager.entity.Task">
+  <selectKey keyProperty="taskid" resultType="java.lang.String" order="BEFORE">
+    select sys_guid() from dual
+  </selectKey>
+    insert into TB_CRM_TASK (TASKID, OWNERUSERID, ABOUT_USER, 
+      SUBJECT, DUEDATE, STATUS, 
+      PRIORITY, SENDEMAIL, CREATORUSERID, 
+      CREATEDATE, UPDTADATE, ISCLOSE, 
+      ISDELETED, DELETEUSERID, DELETETIME, 
+      DESCRIPTION)
+    values (#{taskid,jdbcType=VARCHAR}, #{owneruserid,jdbcType=VARCHAR}, #{aboutUser,jdbcType=VARCHAR}, 
+      #{subject,jdbcType=VARCHAR}, #{duedate,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, 
+      #{priority,jdbcType=VARCHAR}, #{sendemail,jdbcType=VARCHAR}, #{creatoruserid,jdbcType=VARCHAR}, 
+      #{createdate,jdbcType=TIMESTAMP}, #{updtadate,jdbcType=TIMESTAMP}, #{isclose,jdbcType=DECIMAL}, 
+      #{isdeleted,jdbcType=DECIMAL}, #{deleteuserid,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP}, 
+      #{description,jdbcType=BLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhidi.crm.manager.entity.Task">
+  <selectKey keyProperty="taskid" resultType="java.lang.String" order="BEFORE">
+    select sys_guid() from dual
+  </selectKey>
+    insert into TB_CRM_TASK
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="taskid != null">
+        TASKID,
+      </if>
+      <if test="owneruserid != null">
+        OWNERUSERID,
+      </if>
+      <if test="aboutUser != null">
+        ABOUT_USER,
+      </if>
+      <if test="subject != null">
+        SUBJECT,
+      </if>
+      <if test="duedate != null">
+        DUEDATE,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="priority != null">
+        PRIORITY,
+      </if>
+      <if test="sendemail != null">
+        SENDEMAIL,
+      </if>
+      <if test="creatoruserid != null">
+        CREATORUSERID,
+      </if>
+      <if test="createdate != null">
+        CREATEDATE,
+      </if>
+      <if test="updtadate != null">
+        UPDTADATE,
+      </if>
+      <if test="isclose != null">
+        ISCLOSE,
+      </if>
+      <if test="isdeleted != null">
+        ISDELETED,
+      </if>
+      <if test="deleteuserid != null">
+        DELETEUSERID,
+      </if>
+      <if test="deletetime != null">
+        DELETETIME,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="taskid != null">
+        #{taskid,jdbcType=VARCHAR},
+      </if>
+      <if test="owneruserid != null">
+        #{owneruserid,jdbcType=VARCHAR},
+      </if>
+      <if test="aboutUser != null">
+        #{aboutUser,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null">
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="duedate != null">
+        #{duedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=VARCHAR},
+      </if>
+      <if test="sendemail != null">
+        #{sendemail,jdbcType=VARCHAR},
+      </if>
+      <if test="creatoruserid != null">
+        #{creatoruserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updtadate != null">
+        #{updtadate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isclose != null">
+        #{isclose,jdbcType=DECIMAL},
+      </if>
+      <if test="isdeleted != null">
+        #{isdeleted,jdbcType=DECIMAL},
+      </if>
+      <if test="deleteuserid != null">
+        #{deleteuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="deletetime != null">
+        #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=BLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhidi.crm.manager.entity.Task">
+    update TB_CRM_TASK
+    <set>
+      <if test="owneruserid != null">
+        OWNERUSERID = #{owneruserid,jdbcType=VARCHAR},
+      </if>
+      <if test="aboutUser != null">
+        ABOUT_USER = #{aboutUser,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null">
+        SUBJECT = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="duedate != null">
+        DUEDATE = #{duedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null">
+        PRIORITY = #{priority,jdbcType=VARCHAR},
+      </if>
+      <if test="sendemail != null">
+        SENDEMAIL = #{sendemail,jdbcType=VARCHAR},
+      </if>
+      <if test="creatoruserid != null">
+        CREATORUSERID = #{creatoruserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updtadate != null">
+        UPDTADATE = #{updtadate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isclose != null">
+        ISCLOSE = #{isclose,jdbcType=DECIMAL},
+      </if>
+      <if test="isdeleted != null">
+        ISDELETED = #{isdeleted,jdbcType=DECIMAL},
+      </if>
+      <if test="deleteuserid != null">
+        DELETEUSERID = #{deleteuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="deletetime != null">
+        DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=BLOB},
+      </if>
+    </set>
+    where TASKID = #{taskid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zhidi.crm.manager.entity.Task">
+    update TB_CRM_TASK
+    set OWNERUSERID = #{owneruserid,jdbcType=VARCHAR},
+      ABOUT_USER = #{aboutUser,jdbcType=VARCHAR},
+      SUBJECT = #{subject,jdbcType=VARCHAR},
+      DUEDATE = #{duedate,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=VARCHAR},
+      PRIORITY = #{priority,jdbcType=VARCHAR},
+      SENDEMAIL = #{sendemail,jdbcType=VARCHAR},
+      CREATORUSERID = #{creatoruserid,jdbcType=VARCHAR},
+      CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+      UPDTADATE = #{updtadate,jdbcType=TIMESTAMP},
+      ISCLOSE = #{isclose,jdbcType=DECIMAL},
+      ISDELETED = #{isdeleted,jdbcType=DECIMAL},
+      DELETEUSERID = #{deleteuserid,jdbcType=VARCHAR},
+      DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+      DESCRIPTION = #{description,jdbcType=BLOB}
+    where TASKID = #{taskid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhidi.crm.manager.entity.Task">
+    update TB_CRM_TASK
+    set OWNERUSERID = #{owneruserid,jdbcType=VARCHAR},
+      ABOUT_USER = #{aboutUser,jdbcType=VARCHAR},
+      SUBJECT = #{subject,jdbcType=VARCHAR},
+      DUEDATE = #{duedate,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=VARCHAR},
+      PRIORITY = #{priority,jdbcType=VARCHAR},
+      SENDEMAIL = #{sendemail,jdbcType=VARCHAR},
+      CREATORUSERID = #{creatoruserid,jdbcType=VARCHAR},
+      CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+      UPDTADATE = #{updtadate,jdbcType=TIMESTAMP},
+      ISCLOSE = #{isclose,jdbcType=DECIMAL},
+      ISDELETED = #{isdeleted,jdbcType=DECIMAL},
+      DELETEUSERID = #{deleteuserid,jdbcType=VARCHAR},
+      DELETETIME = #{deletetime,jdbcType=TIMESTAMP}
+    where TASKID = #{taskid,jdbcType=VARCHAR}
+  </update>
+  <select id="getCount" resultType="integer" parameterType="com.zhidi.crm.manager.entity.Task">
+  	select
+  		count(1)
+  	from
+  		TB_CRM_TASK tct
+  	left join
+  		TB_SYSTEM_USER tsu
+  	on
+  		tct.owneruserid = tsu.id
+  	left join
+  		TB_SYSTEM_USER tsu2
+  	on
+  		tct.creatoruserid = tsu2.id
+  	<where>
+  		<if test="task.subject != null and task.subject != ''">
+  			<bind name="bl" value="'%'+_parameter.task.subject+'%'"/>
+	 		and subject like #{bl}
+  		</if>
+  		<if test="task.creatoruserid != null and task.creatoruserid != ''">
+  			<!-- instr(CREATORUSERID,#{task.creatoruserid}) > 0 and -->
+  			<bind name="bk" value="'%'+_parameter.task.CREATORUSERID+'%'"/>
+	 		and tsu2.username like #{bk}
+  		</if>
+  		<if test="task.owneruserid != null and task.owneruserid != ''">
+  			<!-- instr(OWNERUSERID,#{task.owneruserid}) > 0 and -->
+  			<bind name="bn" value="'%'+_parameter.task.owneruserid+'%'"/>
+	 		and tsu.username like #{bn}
+  		</if>
+  		<if	test="task.status != null and task.status != ''">
+  			<!-- instr(status,#{task.status}) > 0 and -->
+  			<bind name="bm" value="'%'+_parameter.task.status+'%'"/>
+	 		and status like #{bm}
+  		</if>
+  		<if test="task.priority != null and task.priority != ''">
+  			<!-- instr(priority,#{task.priority}) > 0 and -->
+  			<bind name="bo" value="'%'+_parameter.task.priority+'%'"/>
+	 		and priority like #{bo}
+  		</if>
+  		<if test="task.description != null and task.description != ''">
+  			<!-- instr(description,#{task.description}) > 0 and -->
+  			<bind name="bp" value="'%'+_parameter.task.description+'%'"/>
+	 		and description like #{bp}
+  		</if>
+  		<if test="task.duedate != null">
+  			and date_format(duedate, '%Y-%m') = date_format(#{task.duedate},'%Y-%m')
+  		</if>
+  	</where>
+  </select>
+  <select id="findByPage" resultMap="ResultMapWithBLOBs">
+  select
+  	t.*
+  		from
+  (select
+  		tct.taskid,
+  		tct.subject,
+  		tct.about_user,
+  		tsu.username OWNERUSERID,
+  		tct.status,
+  		tct.priority,
+  		tsu2.username CREATORUSERID,
+  		tct.duedate
+  	from
+  		TB_CRM_TASK tct
+  	left join
+  		TB_SYSTEM_USER tsu
+  	on
+  		tct.owneruserid = tsu.id
+  	left join
+  		TB_SYSTEM_USER tsu2
+  	on
+  		tct.creatoruserid = tsu2.id
+  	order by tct.duedate desc
+  	) t
+  	<where>
+  		<if test="task.subject != null and task.subject != ''">
+  			<bind name="bl" value="'%'+_parameter.task.subject+'%'"/>
+	 		and t.subject like #{bl}
+  		</if>
+  		<if test="task.creatoruserid != null and task.creatoruserid != ''">
+  			<!-- instr(CREATORUSERID,#{task.creatoruserid}) > 0 and -->
+  			<bind name="bk" value="'%'+_parameter.task.CREATORUSERID+'%'"/>
+	 		and t.CREATORUSERID like #{bk}
+  		</if>
+  		<if test="task.owneruserid != null and task.owneruserid != ''">
+  			<!-- instr(OWNERUSERID,#{task.owneruserid}) > 0 and -->
+  			<bind name="bn" value="'%'+_parameter.task.owneruserid+'%'"/>
+	 		and t.owneruserid like #{bn}
+  		</if>
+  		<if	test="task.status != null and task.status != ''">
+  			<!-- instr(status,#{task.status}) > 0 and -->
+  			<bind name="bm" value="'%'+_parameter.task.status+'%'"/>
+	 		and t.status like #{bm}
+  		</if>
+  		<if test="task.priority != null and task.priority != ''">
+  			<!-- instr(priority,#{task.priority}) > 0 and -->
+  			<bind name="bo" value="'%'+_parameter.task.priority+'%'"/>
+	 		and t.priority like #{bo}
+  		</if>
+  		<if test="task.description != null and task.description != ''">
+  			<!-- instr(description,#{task.description}) > 0 and -->
+  			<bind name="bp" value="'%'+_parameter.task.description+'%'"/>
+	 		and t.description like #{bp}
+  		</if>
+  		<if test="task.duedate != null">
+  			and date_format(t.duedate, '%Y-%m') = date_format(#{task.duedate},'%Y-%m')
+  		</if>
+  	</where>
+  	limit #{firstResult},#{maxResult}
+  </select>
+  <select id="getColumn" resultType="object">
+  	select DISTINCT
+  		<if test="column == 'subject'">
+  			tct.subject
+  		</if>
+  		<if test="column == 'creatoruserid'">
+  			tsu2.username CREATORUSERID
+  		</if>
+  		<if test="column == 'owneruserid'">
+  			tsu.username OWNERUSERID
+  		</if>
+  		<if test="column == 'status'">
+  			tct.status
+  		</if>
+  		<if test="column == 'priority'">
+	  		tct.priority
+  		</if>
+  		<if test="column == 'duedate'">
+	  		date_format(tct.duedate, '%Y-%m')
+  		</if>
+  	from
+  		TB_CRM_TASK tct
+  	left join
+  		TB_SYSTEM_USER tsu
+  	on
+  		tct.owneruserid = tsu.id
+  	left join
+  		TB_SYSTEM_USER tsu2
+  	on
+  		tct.creatoruserid = tsu2.id
+  </select>
+</mapper>

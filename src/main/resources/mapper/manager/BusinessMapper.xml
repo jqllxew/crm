@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhidi.crm.manager.mapper.BusinessMapper">
+  <resultMap id="BaseResultMap" type="com.zhidi.crm.manager.entity.Business">
+    <id column="BUSINESSID" jdbcType="VARCHAR" property="businessid" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="ORIGIN" jdbcType="VARCHAR" property="origin" />
+    <result column="TYPE" jdbcType="VARCHAR" property="type" />
+    <result column="ESTIMATEPRICE" jdbcType="DECIMAL" property="estimateprice" />
+    <result column="CUSTOMERID" jdbcType="VARCHAR" property="customerid" />
+    <result column="CREATORUSERID" jdbcType="VARCHAR" property="creatoruserid" />
+    <result column="OWNERUSERID" jdbcType="VARCHAR" property="owneruserid" />
+    <result column="GAINRATE" jdbcType="DECIMAL" property="gainrate" />
+    <result column="TOTALAMOUNT" jdbcType="DECIMAL" property="totalamount" />
+    <result column="SUBTOTALVAL" jdbcType="DECIMAL" property="subtotalval" />
+    <result column="DISCOUNTPRICE" jdbcType="DECIMAL" property="discountprice" />
+    <result column="SALESPRICE" jdbcType="DECIMAL" property="salesprice" />
+    <result column="DUEDATE" jdbcType="TIMESTAMP" property="duedate" />
+    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="UPDATETIME" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="UPDATEUSERID" jdbcType="VARCHAR" property="updateuserid" />
+    <result column="STATUSID" jdbcType="VARCHAR" property="statusid" />
+    <result column="TOTALPRICE" jdbcType="DECIMAL" property="totalprice" />
+    <result column="NEXTSTEP" jdbcType="VARCHAR" property="nextstep" />
+    <result column="NEXTSTEPTIME" jdbcType="TIMESTAMP" property="nextsteptime" />
+    <result column="ISDELETED" jdbcType="DECIMAL" property="isdeleted" />
+    <result column="DELETEUSERID" jdbcType="VARCHAR" property="deleteuserid" />
+    <result column="DELETETIME" jdbcType="TIMESTAMP" property="deletetime" />
+    <result column="CONTACTSID" jdbcType="VARCHAR" property="contactsid" />
+    <result column="CONTRACTADDRESS" jdbcType="VARCHAR" property="contractaddress" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    BUSINESSID, NAME, ORIGIN, TYPE, ESTIMATEPRICE, CUSTOMERID, CREATORUSERID, OWNERUSERID, 
+    GAINRATE, TOTALAMOUNT, SUBTOTALVAL, DISCOUNTPRICE, SALESPRICE, DUEDATE, CREATETIME, 
+    UPDATETIME, UPDATEUSERID, STATUSID, TOTALPRICE, NEXTSTEP, NEXTSTEPTIME, ISDELETED, 
+    DELETEUSERID, DELETETIME, CONTACTSID, CONTRACTADDRESS, DESCRIPTION
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_CRM_BUSINESS
+    where BUSINESSID = #{businessid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB_CRM_BUSINESS
+    where BUSINESSID = #{businessid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhidi.crm.manager.entity.Business">
+  <selectKey keyProperty="BUSINESSID" resultType="java.lang.String" order="BEFORE">
+    select sys_guid() from dual
+  </selectKey>
+    insert into TB_CRM_BUSINESS (BUSINESSID, NAME, ORIGIN, 
+      TYPE, ESTIMATEPRICE, CUSTOMERID, 
+      CREATORUSERID, OWNERUSERID, GAINRATE, 
+      TOTALAMOUNT, SUBTOTALVAL, DISCOUNTPRICE, 
+      SALESPRICE, DUEDATE, CREATETIME, 
+      UPDATETIME, UPDATEUSERID, STATUSID, 
+      TOTALPRICE, NEXTSTEP, NEXTSTEPTIME, 
+      ISDELETED, DELETEUSERID, DELETETIME, 
+      CONTACTSID, CONTRACTADDRESS, DESCRIPTION
+      )
+    values (#{businessid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{origin,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{estimateprice,jdbcType=DECIMAL}, #{customerid,jdbcType=VARCHAR}, 
+      #{creatoruserid,jdbcType=VARCHAR}, #{owneruserid,jdbcType=VARCHAR}, #{gainrate,jdbcType=DECIMAL}, 
+      #{totalamount,jdbcType=DECIMAL}, #{subtotalval,jdbcType=DECIMAL}, #{discountprice,jdbcType=DECIMAL}, 
+      #{salesprice,jdbcType=DECIMAL}, #{duedate,jdbcType=TIMESTAMP}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{updateuserid,jdbcType=VARCHAR}, #{statusid,jdbcType=VARCHAR}, 
+      #{totalprice,jdbcType=DECIMAL}, #{nextstep,jdbcType=VARCHAR}, #{nextsteptime,jdbcType=TIMESTAMP}, 
+      #{isdeleted,jdbcType=DECIMAL}, #{deleteuserid,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP}, 
+      #{contactsid,jdbcType=VARCHAR}, #{contractaddress,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhidi.crm.manager.entity.Business">
+  <selectKey keyProperty="BUSINESSID" resultType="java.lang.String" order="BEFORE">
+    select replace(uuid(),'-','') from dual
+  </selectKey>
+    insert into TB_CRM_BUSINESS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="businessid != null">
+        BUSINESSID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="origin != null">
+        ORIGIN,
+      </if>
+      <if test="type != null">
+        TYPE,
+      </if>
+      <if test="estimateprice != null">
+        ESTIMATEPRICE,
+      </if>
+      <if test="customerid != null">
+        CUSTOMERID,
+      </if>
+      <if test="creatoruserid != null">
+        CREATORUSERID,
+      </if>
+      <if test="owneruserid != null">
+        OWNERUSERID,
+      </if>
+      <if test="gainrate != null">
+        GAINRATE,
+      </if>
+      <if test="totalamount != null">
+        TOTALAMOUNT,
+      </if>
+      <if test="subtotalval != null">
+        SUBTOTALVAL,
+      </if>
+      <if test="discountprice != null">
+        DISCOUNTPRICE,
+      </if>
+      <if test="salesprice != null">
+        SALESPRICE,
+      </if>
+      <if test="duedate != null">
+        DUEDATE,
+      </if>
+      <if test="createtime != null">
+        CREATETIME,
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME,
+      </if>
+      <if test="updateuserid != null">
+        UPDATEUSERID,
+      </if>
+      <if test="statusid != null">
+        STATUSID,
+      </if>
+      <if test="totalprice != null">
+        TOTALPRICE,
+      </if>
+      <if test="nextstep != null">
+        NEXTSTEP,
+      </if>
+      <if test="nextsteptime != null">
+        NEXTSTEPTIME,
+      </if>
+      <if test="isdeleted != null">
+        ISDELETED,
+      </if>
+      <if test="deleteuserid != null">
+        DELETEUSERID,
+      </if>
+      <if test="deletetime != null">
+        DELETETIME,
+      </if>
+      <if test="contactsid != null">
+        CONTACTSID,
+      </if>
+      <if test="contractaddress != null">
+        CONTRACTADDRESS,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="businessid != null">
+        #{businessid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null">
+        #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="estimateprice != null">
+        #{estimateprice,jdbcType=DECIMAL},
+      </if>
+      <if test="customerid != null">
+        #{customerid,jdbcType=VARCHAR},
+      </if>
+      <if test="creatoruserid != null">
+        #{creatoruserid,jdbcType=VARCHAR},
+      </if>
+      <if test="owneruserid != null">
+        #{owneruserid,jdbcType=VARCHAR},
+      </if>
+      <if test="gainrate != null">
+        #{gainrate,jdbcType=DECIMAL},
+      </if>
+      <if test="totalamount != null">
+        #{totalamount,jdbcType=DECIMAL},
+      </if>
+      <if test="subtotalval != null">
+        #{subtotalval,jdbcType=DECIMAL},
+      </if>
+      <if test="discountprice != null">
+        #{discountprice,jdbcType=DECIMAL},
+      </if>
+      <if test="salesprice != null">
+        #{salesprice,jdbcType=DECIMAL},
+      </if>
+      <if test="duedate != null">
+        #{duedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null">
+        #{updateuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="statusid != null">
+        #{statusid,jdbcType=VARCHAR},
+      </if>
+      <if test="totalprice != null">
+        #{totalprice,jdbcType=DECIMAL},
+      </if>
+      <if test="nextstep != null">
+        #{nextstep,jdbcType=VARCHAR},
+      </if>
+      <if test="nextsteptime != null">
+        #{nextsteptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdeleted != null">
+        #{isdeleted,jdbcType=DECIMAL},
+      </if>
+      <if test="deleteuserid != null">
+        #{deleteuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="deletetime != null">
+        #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contactsid != null">
+        #{contactsid,jdbcType=VARCHAR},
+      </if>
+      <if test="contractaddress != null">
+        #{contractaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhidi.crm.manager.entity.Business">
+    update TB_CRM_BUSINESS
+    <set>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null">
+        ORIGIN = #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="estimateprice != null">
+        ESTIMATEPRICE = #{estimateprice,jdbcType=DECIMAL},
+      </if>
+      <if test="customerid != null">
+        CUSTOMERID = #{customerid,jdbcType=VARCHAR},
+      </if>
+      <if test="creatoruserid != null">
+        CREATORUSERID = #{creatoruserid,jdbcType=VARCHAR},
+      </if>
+      <if test="owneruserid != null">
+        OWNERUSERID = #{owneruserid,jdbcType=VARCHAR},
+      </if>
+      <if test="gainrate != null">
+        GAINRATE = #{gainrate,jdbcType=DECIMAL},
+      </if>
+      <if test="totalamount != null">
+        TOTALAMOUNT = #{totalamount,jdbcType=DECIMAL},
+      </if>
+      <if test="subtotalval != null">
+        SUBTOTALVAL = #{subtotalval,jdbcType=DECIMAL},
+      </if>
+      <if test="discountprice != null">
+        DISCOUNTPRICE = #{discountprice,jdbcType=DECIMAL},
+      </if>
+      <if test="salesprice != null">
+        SALESPRICE = #{salesprice,jdbcType=DECIMAL},
+      </if>
+      <if test="duedate != null">
+        DUEDATE = #{duedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null">
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null">
+        UPDATEUSERID = #{updateuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="statusid != null">
+        STATUSID = #{statusid,jdbcType=VARCHAR},
+      </if>
+      <if test="totalprice != null">
+        TOTALPRICE = #{totalprice,jdbcType=DECIMAL},
+      </if>
+      <if test="nextstep != null">
+        NEXTSTEP = #{nextstep,jdbcType=VARCHAR},
+      </if>
+      <if test="nextsteptime != null">
+        NEXTSTEPTIME = #{nextsteptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdeleted != null">
+        ISDELETED = #{isdeleted,jdbcType=DECIMAL},
+      </if>
+      <if test="deleteuserid != null">
+        DELETEUSERID = #{deleteuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="deletetime != null">
+        DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contactsid != null">
+        CONTACTSID = #{contactsid,jdbcType=VARCHAR},
+      </if>
+      <if test="contractaddress != null">
+        CONTRACTADDRESS = #{contractaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BUSINESSID = #{businessid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhidi.crm.manager.entity.Business">
+    update TB_CRM_BUSINESS
+    set NAME = #{name,jdbcType=VARCHAR},
+      ORIGIN = #{origin,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      ESTIMATEPRICE = #{estimateprice,jdbcType=DECIMAL},
+      CUSTOMERID = #{customerid,jdbcType=VARCHAR},  
+      CREATORUSERID = #{creatoruserid,jdbcType=VARCHAR},
+      OWNERUSERID = #{owneruserid,jdbcType=VARCHAR},
+      GAINRATE = #{gainrate,jdbcType=DECIMAL},
+      TOTALAMOUNT = #{totalamount,jdbcType=DECIMAL},
+      SUBTOTALVAL = #{subtotalval,jdbcType=DECIMAL},
+      DISCOUNTPRICE = #{discountprice,jdbcType=DECIMAL},
+      SALESPRICE = #{salesprice,jdbcType=DECIMAL},
+      DUEDATE = #{duedate,jdbcType=TIMESTAMP},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      UPDATEUSERID = #{updateuserid,jdbcType=VARCHAR},
+      STATUSID = #{statusid,jdbcType=VARCHAR},
+      TOTALPRICE = #{totalprice,jdbcType=DECIMAL},
+      NEXTSTEP = #{nextstep,jdbcType=VARCHAR},
+      NEXTSTEPTIME = #{nextsteptime,jdbcType=TIMESTAMP},
+      ISDELETED = #{isdeleted,jdbcType=DECIMAL},
+      DELETEUSERID = #{deleteuserid,jdbcType=VARCHAR},
+      DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+      CONTACTSID = #{contactsid,jdbcType=VARCHAR},
+      CONTRACTADDRESS = #{contractaddress,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR}
+    where BUSINESSID = #{businessid,jdbcType=VARCHAR}
+  </update>
+     <select id="queryAll" resultMap="BaseResultMap">
+         select
+             businessid,
+             name
+         from
+             tb_crm_business
+     </select>
+     
+     <select id="count" resultType="integer">
+     	select count(1) from tb_crm_business
+     	<where>
+     			<if test="cval != null and cval != ''" >
+		    		instr(tcc.name,#{val}) > 0 
+		    	</if>
+		    	<if test="val != null and val != ''" >
+		    		 instr(tcb.name,#{val}) > 0
+		    	</if>
+		    	<if test="nsval != null and val != ''" >
+		    		 instr(tcb.nextstep,#{val}) > 0 
+		    	</if>
+		    	<if test="oval != null and val != ''" >
+		    		 instr(tcb.origin,#{val}) > 0 
+		    	</if>
+		  </where>
+     </select>
+     <select id="selectByPage" resultMap="BaseResultMap">
+       select
+       tcb.businessid,
+       tcc.name customerid,
+       tcb.name,
+       tcb.origin,
+       tcb.nextsteptime,
+       tcb.nextstep,
+       tsu.username owneruserid,
+       tsu2.username creatoruserid,
+       tcb.createtime,
+       tcb.updatetime
+       from TB_CRM_BUSINESS tcb
+       left join TB_CRM_CUSTOMER tcc
+       on tcb.CUSTOMERID=tcc.CUSTOMERID
+       left join TB_SYSTEM_USER tsu
+       on tsu.id = tcb.owneruserid
+       left join TB_SYSTEM_USER tsu2
+       on tsu2.id = tcb.creatoruserid
+       <where>
+         <if test="cval != null and cval != ''" >
+           instr(tcc.name,#{val}) > 0 and
+         </if>
+         <if test="val != null and val != ''" >
+           instr(tcb.name,#{val}) > 0 and
+         </if>
+         <if test="nsval != null and val != ''" >
+           instr(tcb.nextstep,#{val}) > 0 and
+         </if>
+         <if test="oval != null and val != ''" >
+           instr(tcb.origin,#{val}) > 0 and
+         </if>
+       </where>
+       limit #{pager.limits}.#{pager.rows}
+     </select>
+     <select id="selectById" resultMap="BaseResultMap">
+     	select  tcb.businessid,
+	        tcc.name customerid,
+	        tsu.username owneruserid,
+	        tcb.salesprice,
+	        tcb.name,
+	        tcs.name contactsid,
+	        tcb.contractaddress,
+	        tcb.type,
+	        tcbs.name statusid,
+	        tcb.origin,
+	        tcb.gainrate,
+	        tcb.estimateprice,
+	        tcb.nextsteptime,
+	        tcb.nextstep,
+	        tcb.description
+        from TB_CRM_BUSINESS tcb
+         left join TB_CRM_CUSTOMER tcc
+        on tcb.CUSTOMERID=tcc.CUSTOMERID 
+        left join TB_SYSTEM_USER tsu
+        on tsu.id = tcb.owneruserid 
+        left join TB_CRM_BUSINESS_STATUS tcbs
+        on tcb.statusid=tcbs.statusid
+        left join TB_CRM_CONTACTS tcs
+        on tcb.contactsid=tcs.contactsid
+        where tcb.businessid=#{id}
+     </select>
+</mapper>

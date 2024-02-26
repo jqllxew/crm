@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhidi.crm.system.mapper.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.zhidi.crm.system.entity.Role">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="ROLENAME" jdbcType="VARCHAR" property="rolename" />
+    <result column="ROLENOTE" jdbcType="VARCHAR" property="rolenote" />
+    <result column="SORTNUM" jdbcType="DECIMAL" property="sortnum" />
+    <result column="STATUS" jdbcType="DECIMAL" property="status" />
+    <result column="UPDATETIME" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="CREATEBY" jdbcType="VARCHAR" property="createby" />
+    <result column="UPDATEBY" jdbcType="VARCHAR" property="updateby" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, CREATETIME, ROLENAME, ROLENOTE, SORTNUM, STATUS, UPDATETIME, CREATEBY, UPDATEBY
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_SYSTEM_ROLE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB_SYSTEM_ROLE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhidi.crm.system.entity.Role">
+  <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+    <!-- select sys_guid() from dual -->
+    select replace(uuid(),'-','') uuid from dual
+  </selectKey>
+    insert into TB_SYSTEM_ROLE (ID, CREATETIME, ROLENAME, 
+      ROLENOTE, SORTNUM, STATUS, 
+      UPDATETIME, CREATEBY, UPDATEBY
+      )
+    values (#{id,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{rolename,jdbcType=VARCHAR}, 
+      #{rolenote,jdbcType=VARCHAR}, #{sortnum,jdbcType=DECIMAL}, #{status,jdbcType=DECIMAL}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{createby,jdbcType=VARCHAR}, #{updateby,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhidi.crm.system.entity.Role">
+  <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+    <!-- select sys_guid() from dual -->
+    select replace(uuid(),'-','') uuid from dual
+  </selectKey>
+    insert into TB_SYSTEM_ROLE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="createtime != null">
+        CREATETIME,
+      </if>
+      <if test="rolename != null">
+        ROLENAME,
+      </if>
+      <if test="rolenote != null">
+        ROLENOTE,
+      </if>
+      <if test="sortnum != null">
+        SORTNUM,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME,
+      </if>
+      <if test="createby != null">
+        CREATEBY,
+      </if>
+      <if test="updateby != null">
+        UPDATEBY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rolename != null">
+        #{rolename,jdbcType=VARCHAR},
+      </if>
+      <if test="rolenote != null">
+        #{rolenote,jdbcType=VARCHAR},
+      </if>
+      <if test="sortnum != null">
+        #{sortnum,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createby != null">
+        #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="updateby != null">
+        #{updateby,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhidi.crm.system.entity.Role">
+    update TB_SYSTEM_ROLE
+    <set>
+      <if test="createtime != null">
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rolename != null">
+        ROLENAME = #{rolename,jdbcType=VARCHAR},
+      </if>
+      <if test="rolenote != null">
+        ROLENOTE = #{rolenote,jdbcType=VARCHAR},
+      </if>
+      <if test="sortnum != null">
+        SORTNUM = #{sortnum,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createby != null">
+        CREATEBY = #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="updateby != null">
+        UPDATEBY = #{updateby,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhidi.crm.system.entity.Role">
+    update TB_SYSTEM_ROLE
+    set CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      ROLENAME = #{rolename,jdbcType=VARCHAR},
+      ROLENOTE = #{rolenote,jdbcType=VARCHAR},
+      SORTNUM = #{sortnum,jdbcType=DECIMAL},
+      STATUS = #{status,jdbcType=DECIMAL},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      CREATEBY = #{createby,jdbcType=VARCHAR},
+      UPDATEBY = #{updateby,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="queryfindAll" resultMap="BaseResultMap">
+  	select 
+  		id,
+  		rolename,
+  		rolenote,
+  		status
+  	from
+  		TB_SYSTEM_ROLE
+  </select>
+  <select id="getCount" resultType="integer">
+  	select 
+  		count(1)
+  	from
+  		TB_SYSTEM_ROLE
+  </select>
+  <resultMap type="com.zhidi.crm.system.entity.vo.RoleVo" id="rolevo">
+  	<id property="id" column="id"/>
+  	<result property="rolename" column="rolename"/>
+  	<result property="rolenote" column="rolenote"/>
+  	<result property="sortnum" column="sortnum"/>
+  	<result property="funcIds" column="funcIds"/>
+  	<result property="funcnames" column="funcnames"/>
+  	<result property="createbyId" column="createbyId"/>
+  	<result property="createby" column="createby"/>
+  	<result property="createtime" column="createtime"/>
+  	<result property="updateby" column="updateby"/>
+  	<result property="updatetime" column="updatetime"/>
+  	<result property="status" column="status"/>
+  </resultMap>
+  <select id="findByPage" resultMap="rolevo">
+  	select r.* from 
+  	(select 
+		tsr.ID,
+		tsr.rolename,
+		tsr.rolenote,
+		(select group_concat(tsf.funcname)
+			from TB_SYSTEM_FUNCTION tsf 
+		left join 
+			TB_SYSTEM_ROLE_FUNCTION tsrf
+		on tsf.id = tsrf.FUNCID
+		where 
+			tsrf.ROLEID = tsr.id
+		) funcnames,
+		tsu.username createby,
+		tsr.createtime,
+		tsu2.username updateby,
+		tsr.updatetime,
+		tsr.status
+		from TB_SYSTEM_ROLE tsr
+	left join 
+		TB_SYSTEM_USER tsu
+		on tsr.CREATEBY = tsu.id
+	left join
+		TB_SYSTEM_USER tsu2
+		on tsr.UPDATEBY = tsu2.id
+	) r 
+	limit #{firstResult},#{maxResult}
+  </select>
+  <select id="queryDefault" resultMap="rolevo">
+  	select 
+		tsr.ID,
+		tsr.rolename,
+		tsr.rolenote,
+		(select group_concat(tsrf.funcid)
+		from  
+			TB_SYSTEM_ROLE_FUNCTION tsrf
+		where 
+			tsrf.ROLEID = tsr.id
+		) funcIds,
+		tsr.createby,
+		tsr.createtime,
+		tsr.sortnum,
+		tsr.status
+		from TB_SYSTEM_ROLE tsr
+	left join 
+		TB_SYSTEM_USER tsu
+		on tsr.CREATEBY = tsu.id
+	left join
+		TB_SYSTEM_USER tsu2
+		on tsr.UPDATEBY = tsu2.id
+	where tsr.id = #{id}
+  </select>
+  <update id="removeRole">
+  	update 
+  		TB_SYSTEM_ROLE
+  	set
+  		STATUS = 2,
+  		UPDATEBY = #{adminId},
+  		UPDATETIME = #{updateTime}
+  	where
+  		ID in
+	<foreach collection="roleids" item="roleid" open="(" close=")" separator=",">
+		#{roleid}
+  	</foreach>
+  </update>
+  <delete id="removeUserRole">
+  	delete from 
+  		TB_SYSTEM_USER_ROLE
+  	where
+  		ROLEID in
+  		<foreach collection="roleids" item="roleid" open="(" close=")" separator=",">
+  			#{roleid}
+  		</foreach>
+  </delete>
+  <delete id="removeFunctionRole">
+  	delete from 
+  		TB_SYSTEM_ROLE_FUNCTION
+  	where
+  		ROLEID in
+  		<foreach collection="roleids" item="roleid" open="(" close=")" separator=",">
+  			#{roleid}
+  		</foreach>
+  </delete>
+  <delete id="deleteRole">
+  	delete from
+  		TB_SYSTEM_ROLE
+  	where
+  		 ID in
+  		 <foreach collection="roleids" item="roleid" open="(" close=")" separator=",">
+  		 	#{roleid}
+  		 </foreach>
+  </delete>
+  <select id="queryDefaultRole" resultType="string">
+  	select 
+	  	ROLEID
+	from
+	    TB_SYSTEM_USER_ROLE
+	where
+	    USERID = #{id}
+  </select>
+  <delete id="deleteRoleDist">
+  	delete from 
+  		TB_SYSTEM_USER_ROLE
+  	where
+  		USERID = #{userid}
+  </delete>
+  <insert id="insertRoleDist">
+  	insert into 
+  		TB_SYSTEM_USER_ROLE 
+  	(USERID,ROLEID) values (#{userid},#{roleid})
+  </insert>
+  <select id="selectByName" resultMap="BaseResultMap">
+  	select 
+  		<include refid="Base_Column_List"/>
+  	from 
+  		TB_SYSTEM_ROLE
+  	where
+  		rolename = #{rolename}
+  </select>
+</mapper>

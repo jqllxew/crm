@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhidi.crm.manager.mapper.ContactsMapper">
+  <resultMap id="BaseResultMap" type="com.zhidi.crm.manager.entity.Contacts">
+    <id column="CONTACTSID" jdbcType="VARCHAR" property="contactsid" />
+    <result column="CREATORUSERID" jdbcType="VARCHAR" property="creatoruserid" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="POST" jdbcType="VARCHAR" property="post" />
+    <result column="DEPARTMENT" jdbcType="VARCHAR" property="department" />
+    <result column="SEX" jdbcType="DECIMAL" property="sex" />
+    <result column="SALTNAME" jdbcType="VARCHAR" property="saltname" />
+    <result column="TELEPHONE" jdbcType="VARCHAR" property="telephone" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="QQNO" jdbcType="VARCHAR" property="qqno" />
+    <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+    <result column="ZIPCODE" jdbcType="VARCHAR" property="zipcode" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="UPDATDTIME" jdbcType="TIMESTAMP" property="updatdtime" />
+    <result column="ISDELETED" jdbcType="DECIMAL" property="isdeleted" />
+    <result column="DELETEUSERID" jdbcType="VARCHAR" property="deleteuserid" />
+    <result column="DELETETIME" jdbcType="TIMESTAMP" property="deletetime" />
+    <result column="CUSTOMERID" jdbcType="VARCHAR" property="customerid" />
+    <result column="FIRSTCONTACTSID" jdbcType="VARCHAR" property="firstcontactsid" />
+    <result column="ISFIRST" jdbcType="DECIMAL" property="isfirst" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CONTACTSID, CREATORUSERID, NAME, POST, DEPARTMENT, SEX, SALTNAME, TELEPHONE, EMAIL, 
+    QQNO, ADDRESS, ZIPCODE, DESCRIPTION, CREATETIME, UPDATDTIME, ISDELETED, DELETEUSERID, 
+    DELETETIME, CUSTOMERID, FIRSTCONTACTSID, ISFIRST
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_CRM_CONTACTS
+    where CONTACTSID = #{contactsid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB_CRM_CONTACTS
+    where CONTACTSID = #{contactsid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhidi.crm.manager.entity.Contacts">
+  <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+    select sys_guid() from dual
+  </selectKey>
+    insert into TB_CRM_CONTACTS (CONTACTSID, CREATORUSERID, NAME, 
+      POST, DEPARTMENT, SEX, 
+      SALTNAME, TELEPHONE, EMAIL, 
+      QQNO, ADDRESS, ZIPCODE, 
+      DESCRIPTION, CREATETIME, UPDATDTIME, 
+      ISDELETED, DELETEUSERID, DELETETIME, 
+      CUSTOMERID, FIRSTCONTACTSID, ISFIRST
+      )
+    values (#{contactsid,jdbcType=VARCHAR}, #{creatoruserid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{post,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, #{sex,jdbcType=DECIMAL}, 
+      #{saltname,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{qqno,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatdtime,jdbcType=TIMESTAMP}, 
+      #{isdeleted,jdbcType=DECIMAL}, #{deleteuserid,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP}, 
+      #{customerid,jdbcType=VARCHAR}, #{firstcontactsid,jdbcType=VARCHAR}, #{isfirst,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhidi.crm.manager.entity.Contacts">
+  <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+    select sys_guid() from dual
+  </selectKey>
+    insert into TB_CRM_CONTACTS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contactsid != null">
+        CONTACTSID,
+      </if>
+      <if test="creatoruserid != null">
+        CREATORUSERID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="post != null">
+        POST,
+      </if>
+      <if test="department != null">
+        DEPARTMENT,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="saltname != null">
+        SALTNAME,
+      </if>
+      <if test="telephone != null">
+        TELEPHONE,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="qqno != null">
+        QQNO,
+      </if>
+      <if test="address != null">
+        ADDRESS,
+      </if>
+      <if test="zipcode != null">
+        ZIPCODE,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+      <if test="createtime != null">
+        CREATETIME,
+      </if>
+      <if test="updatdtime != null">
+        UPDATDTIME,
+      </if>
+      <if test="isdeleted != null">
+        ISDELETED,
+      </if>
+      <if test="deleteuserid != null">
+        DELETEUSERID,
+      </if>
+      <if test="deletetime != null">
+        DELETETIME,
+      </if>
+      <if test="customerid != null">
+        CUSTOMERID,
+      </if>
+      <if test="firstcontactsid != null">
+        FIRSTCONTACTSID,
+      </if>
+      <if test="isfirst != null">
+        ISFIRST,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contactsid != null">
+        #{contactsid,jdbcType=VARCHAR},
+      </if>
+      <if test="creatoruserid != null">
+        #{creatoruserid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="post != null">
+        #{post,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=DECIMAL},
+      </if>
+      <if test="saltname != null">
+        #{saltname,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qqno != null">
+        #{qqno,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null">
+        #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatdtime != null">
+        #{updatdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdeleted != null">
+        #{isdeleted,jdbcType=DECIMAL},
+      </if>
+      <if test="deleteuserid != null">
+        #{deleteuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="deletetime != null">
+        #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customerid != null">
+        #{customerid,jdbcType=VARCHAR},
+      </if>
+      <if test="firstcontactsid != null">
+        #{firstcontactsid,jdbcType=VARCHAR},
+      </if>
+      <if test="isfirst != null">
+        #{isfirst,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhidi.crm.manager.entity.Contacts">
+    update TB_CRM_CONTACTS
+    <set>
+      <if test="creatoruserid != null">
+        CREATORUSERID = #{creatoruserid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="post != null">
+        POST = #{post,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        DEPARTMENT = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=DECIMAL},
+      </if>
+      <if test="saltname != null">
+        SALTNAME = #{saltname,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qqno != null">
+        QQNO = #{qqno,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null">
+        ZIPCODE = #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatdtime != null">
+        UPDATDTIME = #{updatdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdeleted != null">
+        ISDELETED = #{isdeleted,jdbcType=DECIMAL},
+      </if>
+      <if test="deleteuserid != null">
+        DELETEUSERID = #{deleteuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="deletetime != null">
+        DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customerid != null">
+        CUSTOMERID = #{customerid,jdbcType=VARCHAR},
+      </if>
+      <if test="firstcontactsid != null">
+        FIRSTCONTACTSID = #{firstcontactsid,jdbcType=VARCHAR},
+      </if>
+      <if test="isfirst != null">
+        ISFIRST = #{isfirst,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where CONTACTSID = #{contactsid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhidi.crm.manager.entity.Contacts">
+    update TB_CRM_CONTACTS
+    set CREATORUSERID = #{creatoruserid,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      POST = #{post,jdbcType=VARCHAR},
+      DEPARTMENT = #{department,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=DECIMAL},
+      SALTNAME = #{saltname,jdbcType=VARCHAR},
+      TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      QQNO = #{qqno,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      ZIPCODE = #{zipcode,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      UPDATDTIME = #{updatdtime,jdbcType=TIMESTAMP},
+      ISDELETED = #{isdeleted,jdbcType=DECIMAL},
+      DELETEUSERID = #{deleteuserid,jdbcType=VARCHAR},
+      DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+      CUSTOMERID = #{customerid,jdbcType=VARCHAR},
+      FIRSTCONTACTSID = #{firstcontactsid,jdbcType=VARCHAR},
+      ISFIRST = #{isfirst,jdbcType=DECIMAL}
+    where CONTACTSID = #{contactsid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhidi.crm.system.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.zhidi.crm.system.entity.User">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="SALT" jdbcType="VARCHAR" property="salt" />
+    <result column="SORTNUM" jdbcType="DECIMAL" property="sortnum" />
+    <result column="STATUS" jdbcType="DECIMAL" property="status" />
+    <result column="UPDATETIME" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="USERNOTE" jdbcType="VARCHAR" property="usernote" />
+    <result column="USERNAME" jdbcType="VARCHAR" property="username" />
+    <result column="CREATEBY" jdbcType="VARCHAR" property="createby" />
+    <result column="UPDATEBY" jdbcType="VARCHAR" property="updateby" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, CREATETIME, EMAIL, PASSWORD, PHONE, SALT, SORTNUM, STATUS, UPDATETIME, USERNOTE, 
+    USERNAME, CREATEBY, UPDATEBY
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_SYSTEM_USER
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB_SYSTEM_USER
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhidi.crm.system.entity.User">
+  <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+    <!-- select uuid() from dual -->
+    select replace(uuid(),'-','') uuid from dual
+  </selectKey>
+    insert into TB_SYSTEM_USER (ID, CREATETIME, EMAIL, 
+      PASSWORD, PHONE, SALT, 
+      SORTNUM, STATUS, UPDATETIME, 
+      USERNOTE, USERNAME, CREATEBY, 
+      UPDATEBY)
+    values (#{id,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{email,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, 
+      #{sortnum,jdbcType=DECIMAL}, #{status,jdbcType=DECIMAL}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{usernote,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{createby,jdbcType=VARCHAR}, 
+      #{updateby,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhidi.crm.system.entity.User">
+  <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+    <!-- select uuid() from dual -->
+    select replace(uuid(),'-','') uuid from dual
+  </selectKey>
+    insert into TB_SYSTEM_USER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="createtime != null">
+        CREATETIME,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="password != null">
+        PASSWORD,
+      </if>
+      <if test="phone != null">
+        PHONE,
+      </if>
+      <if test="salt != null">
+        SALT,
+      </if>
+      <if test="sortnum != null">
+        SORTNUM,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME,
+      </if>
+      <if test="usernote != null">
+        USERNOTE,
+      </if>
+      <if test="username != null">
+        USERNAME,
+      </if>
+      <if test="createby != null">
+        CREATEBY,
+      </if>
+      <if test="updateby != null">
+        UPDATEBY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="sortnum != null">
+        #{sortnum,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="usernote != null">
+        #{usernote,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="createby != null">
+        #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="updateby != null">
+        #{updateby,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhidi.crm.system.entity.User">
+    update TB_SYSTEM_USER
+    <set>
+      <if test="createtime != null">
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        SALT = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="sortnum != null">
+        SORTNUM = #{sortnum,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="usernote != null">
+        USERNOTE = #{usernote,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="createby != null">
+        CREATEBY = #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="updateby != null">
+        UPDATEBY = #{updateby,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhidi.crm.system.entity.User">
+    update TB_SYSTEM_USER
+    set CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      SALT = #{salt,jdbcType=VARCHAR},
+      SORTNUM = #{sortnum,jdbcType=DECIMAL},
+      STATUS = #{status,jdbcType=DECIMAL},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      USERNOTE = #{usernote,jdbcType=VARCHAR},
+      USERNAME = #{username,jdbcType=VARCHAR},
+      CREATEBY = #{createby,jdbcType=VARCHAR},
+      UPDATEBY = #{updateby,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByName" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List"/>
+  	from
+  		TB_SYSTEM_USER
+  	where
+  		USERNAME=#{username}
+  </select>
+  
+  <resultMap type="com.zhidi.crm.system.entity.vo.UserVo" id="uservo">
+  	<id property="id" column="id"/>
+  	<result property="username" column="username"/>
+  	<result property="password" column="password"/>
+  	<result property="phone" column="phone"/>
+  	<result property="email" column="email"/>
+  	<result property="usernote" column="usernote"/>
+  	<result property="rolenames" column="rolenames"/>
+  	<result property="roleIds" column="roleIds"/>
+  	<result property="createby" column="createby"/>
+  	<result property="createbyId" column="createbyId"/>
+  	<result property="createtime" column="createtime"/>
+  	<result property="updateby" column="updateby"/>
+  	<result property="updatetime" column="updatetime"/>
+  	<result property="sortnum" column="sortnum"/>
+  	<result property="status" column="status"/>
+  </resultMap>
+  <select id="findByPage" resultMap="uservo">
+  	select u.* from
+	        (select 
+	        tsu.id,
+	        tsu.username,
+	        tsu.phone,
+	        tsu.email,
+	        (
+	        select group_concat(tsr.rolename) 
+	        from TB_SYSTEM_ROLE tsr
+	        left join 
+	        TB_SYSTEM_USER_ROLE tsur
+	        on tsur.ROLEID=tsr.id 
+	        where tsur.USERID=tsu.id
+	        ) rolenames,
+	        tsu2.username createby,
+	        tsu.CREATETIME,
+	        tsu3.username updateby,
+	        tsu.UPDATETIME,
+	        tsu.STATUS
+	        from
+	        TB_SYSTEM_USER tsu
+	        left join 
+	        TB_SYSTEM_USER tsu2
+	        on tsu.createby=tsu2.id
+	        left join
+	        TB_SYSTEM_USER tsu3
+	        on tsu.updateby=tsu3.id
+	        order by updatetime desc
+	        
+	        ) u 
+	limit #{pager.limits},#{pager.rows}
+  </select>
+  <select id="getCount" resultType="integer">
+  		select 
+        	count(1)
+        from
+        	TB_SYSTEM_USER tsu
+        left join 
+        	TB_SYSTEM_USER tsu2
+        on tsu.createby=tsu2.id
+        	left join
+        TB_SYSTEM_USER tsu3
+        on tsu.updateby=tsu3.id
+        
+  </select>
+  <select id="queryDefault" resultMap="uservo">
+  		select 
+        	tsu.id,
+	        tsu.username,
+	        tsu.password,
+	        tsu.phone,
+	        tsu.email,
+	        tsu.sortnum,
+	        tsu.status,
+	        tsu.usernote,
+	        (
+	        select group_concat(tsr.id)
+	        from TB_SYSTEM_ROLE tsr
+	        left join 
+	        TB_SYSTEM_USER_ROLE tsur
+	        on tsur.ROLEID=tsr.id 
+	        where tsur.USERID=tsu.id
+	        ) roleIds,
+	        tsu2.id createById,
+	        tsu.CREATETIME
+        from
+        	TB_SYSTEM_USER tsu
+        left join 
+        	TB_SYSTEM_USER tsu2
+        on tsu.createby=tsu2.id
+        	left join
+        TB_SYSTEM_USER tsu3
+        on tsu.updateby=tsu3.id
+        where tsu.id=#{id}
+  </select>
+  <delete id="removeRoleUser">
+  	delete from
+  		TB_SYSTEM_USER_ROLE
+  	where
+  		userid in
+  		<foreach collection="userids" item="userid" open="(" close=")" separator=",">
+  			#{userid}
+  		</foreach>
+  </delete>
+  <update id="removeUser">
+  	update 
+  		TB_SYSTEM_USER
+  	set
+  		STATUS = 2,
+  		UPDATEBY = #{adminId},
+  		UPDATETIME = #{updateTime}
+  	where
+  		ID in
+	<foreach collection="userids" item="userid" open="(" close=")" separator=",">
+		#{userid}
+  	</foreach>
+  </update>
+  <delete id="deleteUser">
+  	delete from
+  		TB_SYSTEM_USER
+  	where
+  		 ID in
+  		 <foreach collection="userids" item="userid" open="(" close=")" separator=",">
+  		 	#{userid}
+  		 </foreach>
+  </delete>
+</mapper>

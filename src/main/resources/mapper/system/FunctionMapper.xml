@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhidi.crm.system.mapper.FunctionMapper">
+  <resultMap id="BaseResultMap" type="com.zhidi.crm.system.entity.Function">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="FUNCCODE" jdbcType="VARCHAR" property="funccode" />
+    <result column="FUNCNAME" jdbcType="VARCHAR" property="funcname" />
+    <result column="FUNCNOTE" jdbcType="VARCHAR" property="funcnote" />
+    <result column="FUNCTYPE" jdbcType="DECIMAL" property="functype" />
+    <result column="FUNCURL" jdbcType="VARCHAR" property="funcurl" />
+    <result column="ICONCLASS" jdbcType="VARCHAR" property="iconclass" />
+    <result column="ICONURL" jdbcType="VARCHAR" property="iconurl" />
+    <result column="SORTNUM" jdbcType="DECIMAL" property="sortnum" />
+    <result column="STATUS" jdbcType="DECIMAL" property="status" />
+    <result column="UPDATETIME" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="CREATEBY" jdbcType="VARCHAR" property="createby" />
+    <result column="PARENTID" jdbcType="VARCHAR" property="parentid" />
+    <result column="UPDATEBY" jdbcType="VARCHAR" property="updateby" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, CREATETIME, FUNCCODE, FUNCNAME, FUNCNOTE, FUNCTYPE, FUNCURL, ICONCLASS, ICONURL, 
+    SORTNUM, STATUS, UPDATETIME, CREATEBY, PARENTID, UPDATEBY
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_SYSTEM_FUNCTION
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPrimaryKey2" resultMap="BaseResultMap">
+  	select
+  		tsf.id,
+  		tsf.funcname,
+  		tsf.funcurl,
+  		tsf.funccode,
+  		tsf.functype,
+  		tsf2.funcname iconclass,
+  		tsf.parentid,
+  		tsf.sortnum,
+  		tsf.status,
+  		tsf.funcnote
+  	from 
+  		TB_SYSTEM_FUNCTION tsf
+  	left join
+  		TB_SYSTEM_FUNCTION tsf2
+  	on tsf.parentid = tsf2.id
+  	where tsf.id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByName" resultMap="BaseResultMap">
+  	select 
+  		<include refid="Base_Column_List"/>
+  	from
+  		TB_SYSTEM_FUNCTION
+  	where
+  		funcname = #{funcname,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByFunccode" resultMap="BaseResultMap">
+  	select 
+  		<include refid="Base_Column_List"/>
+  	from
+  		TB_SYSTEM_FUNCTION
+  	where
+  		funccode = #{funccode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB_SYSTEM_FUNCTION
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhidi.crm.system.entity.Function">
+  <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+    select replace(uuid(),'-','') uuid from dual
+  </selectKey>
+    insert into TB_SYSTEM_FUNCTION (ID, CREATETIME, FUNCCODE, 
+      FUNCNAME, FUNCNOTE, FUNCTYPE, 
+      FUNCURL, ICONCLASS, ICONURL, 
+      SORTNUM, STATUS, UPDATETIME, 
+      CREATEBY, PARENTID, UPDATEBY
+      )
+    values (#{id,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{funccode,jdbcType=VARCHAR}, 
+      #{funcname,jdbcType=VARCHAR}, #{funcnote,jdbcType=VARCHAR}, #{functype,jdbcType=DECIMAL}, 
+      #{funcurl,jdbcType=VARCHAR}, #{iconclass,jdbcType=VARCHAR}, #{iconurl,jdbcType=VARCHAR}, 
+      #{sortnum,jdbcType=DECIMAL}, #{status,jdbcType=DECIMAL}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{createby,jdbcType=VARCHAR}, #{parentid,jdbcType=VARCHAR}, #{updateby,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhidi.crm.system.entity.Function">
+  <selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+    select replace(uuid(),'-','') uuid from dual
+  </selectKey>
+    insert into TB_SYSTEM_FUNCTION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="createtime != null">
+        CREATETIME,
+      </if>
+      <if test="funccode != null">
+        FUNCCODE,
+      </if>
+      <if test="funcname != null">
+        FUNCNAME,
+      </if>
+      <if test="funcnote != null">
+        FUNCNOTE,
+      </if>
+      <if test="functype != null">
+        FUNCTYPE,
+      </if>
+      <if test="funcurl != null">
+        FUNCURL,
+      </if>
+      <if test="iconclass != null">
+        ICONCLASS,
+      </if>
+      <if test="iconurl != null">
+        ICONURL,
+      </if>
+      <if test="sortnum != null">
+        SORTNUM,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME,
+      </if>
+      <if test="createby != null">
+        CREATEBY,
+      </if>
+      <if test="parentid != null">
+        PARENTID,
+      </if>
+      <if test="updateby != null">
+        UPDATEBY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="funccode != null">
+        #{funccode,jdbcType=VARCHAR},
+      </if>
+      <if test="funcname != null">
+        #{funcname,jdbcType=VARCHAR},
+      </if>
+      <if test="funcnote != null">
+        #{funcnote,jdbcType=VARCHAR},
+      </if>
+      <if test="functype != null">
+        #{functype,jdbcType=DECIMAL},
+      </if>
+      <if test="funcurl != null">
+        #{funcurl,jdbcType=VARCHAR},
+      </if>
+      <if test="iconclass != null">
+        #{iconclass,jdbcType=VARCHAR},
+      </if>
+      <if test="iconurl != null">
+        #{iconurl,jdbcType=VARCHAR},
+      </if>
+      <if test="sortnum != null">
+        #{sortnum,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createby != null">
+        #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null">
+        #{parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="updateby != null">
+        #{updateby,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhidi.crm.system.entity.Function">
+    update TB_SYSTEM_FUNCTION
+    <set>
+      <if test="createtime != null">
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="funccode != null">
+        FUNCCODE = #{funccode,jdbcType=VARCHAR},
+      </if>
+      <if test="funcname != null">
+        FUNCNAME = #{funcname,jdbcType=VARCHAR},
+      </if>
+      <if test="funcnote != null">
+        FUNCNOTE = #{funcnote,jdbcType=VARCHAR},
+      </if>
+      <if test="functype != null">
+        FUNCTYPE = #{functype,jdbcType=DECIMAL},
+      </if>
+      <if test="funcurl != null">
+        FUNCURL = #{funcurl,jdbcType=VARCHAR},
+      </if>
+      <if test="iconclass != null">
+        ICONCLASS = #{iconclass,jdbcType=VARCHAR},
+      </if>
+      <if test="iconurl != null">
+        ICONURL = #{iconurl,jdbcType=VARCHAR},
+      </if>
+      <if test="sortnum != null">
+        SORTNUM = #{sortnum,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createby != null">
+        CREATEBY = #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null">
+        PARENTID = #{parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="updateby != null">
+        UPDATEBY = #{updateby,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhidi.crm.system.entity.Function">
+    update TB_SYSTEM_FUNCTION
+    set CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      FUNCCODE = #{funccode,jdbcType=VARCHAR},
+      FUNCNAME = #{funcname,jdbcType=VARCHAR},
+      FUNCNOTE = #{funcnote,jdbcType=VARCHAR},
+      FUNCTYPE = #{functype,jdbcType=DECIMAL},
+      FUNCURL = #{funcurl,jdbcType=VARCHAR},
+      ICONCLASS = #{iconclass,jdbcType=VARCHAR},
+      ICONURL = #{iconurl,jdbcType=VARCHAR},
+      SORTNUM = #{sortnum,jdbcType=DECIMAL},
+      STATUS = #{status,jdbcType=DECIMAL},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      CREATEBY = #{createby,jdbcType=VARCHAR},
+      PARENTID = #{parentid,jdbcType=VARCHAR},
+      UPDATEBY = #{updateby,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="getmyFunction" resultMap="BaseResultMap">
+  	select DISTINCT 
+  		tsf.*
+  		from TB_SYSTEM_FUNCTION tsf
+	left JOIN 
+		TB_SYSTEM_ROLE_FUNCTION tsrf
+	on tsf.ID=tsrf.FUNCID
+	left join 
+		TB_SYSTEM_ROLE tsr
+	ON tsr.ID=tsrf.ROLEID
+	left join 
+		TB_SYSTEM_USER_ROLE tsur
+	on tsr.ID=tsur.ROLEID
+	where 
+		tsf.functype = 1 and
+		tsur.USERID=#{id}
+  </select>
+  <select id="getAllurlByUserId" resultType="string">
+  	select DISTINCT 
+  		tsf.funcurl
+  		from TB_SYSTEM_FUNCTION tsf
+	left JOIN 
+		TB_SYSTEM_ROLE_FUNCTION tsrf
+	on tsf.ID=tsrf.FUNCID
+	left join 
+		TB_SYSTEM_ROLE tsr
+	ON tsr.ID=tsrf.ROLEID
+	left join 
+		TB_SYSTEM_USER_ROLE tsur
+	on tsr.ID=tsur.ROLEID
+	where 
+		tsur.USERID=#{userid}
+  </select>
+  <select id="queryfindAll" resultMap="BaseResultMap">
+  	select 
+  		id,
+  		funcname,
+  		functype,
+  		funcurl,
+  		parentid,
+  		status
+  	from 
+  		TB_SYSTEM_FUNCTION
+  </select>
+  <select id="getCount" resultType="integer">
+  	select 
+  		count(1)
+  	from
+  		TB_SYSTEM_FUNCTION
+  </select>
+  <resultMap type="com.zhidi.crm.system.entity.vo.FuncVo" id="funcvo">
+  	<id property="id" column="id"/>
+  	<result property="funcname" column="funcname"/>
+  	<result property="functype" column="functype"/>
+  	<result property="funcurl" column="funcurl"/>
+  	<result property="funcnote" column="funcnote"/>
+  	<result property="createby" column="createby"/>
+  	<result property="createbyId" column="createbyId"/>
+  	<result property="createtime" column="createtime"/>
+  	<result property="updateby" column="updateby"/>
+  	<result property="updatetime" column="updatetime"/>
+  	<result property="status" column="status"/>
+  	<result property="funccode" column="funccode"/>
+  	<result property="parentid" column="parentid"/>
+  </resultMap>
+  <select id="queryfindAll2" resultMap="funcvo">
+  		select 
+	  		tsf.id,
+	  		tsf.funcname,
+	  		tsf.functype,
+	  		tsf.funcurl,
+	  		tsf.funcnote,
+	  		tsf.parentid,
+	  		tsu.username createby,
+	  		tsf.createtime,
+	  		tsu2.username updateby,
+	  		tsf.updatetime,
+	  		tsf.status
+	  	from
+		    TB_SYSTEM_FUNCTION tsf
+		left join 
+		    TB_SYSTEM_USER tsu
+		on tsf.CREATEBY = tsu.id
+		left join
+		    TB_SYSTEM_USER tsu2
+		on tsf.UPDATEBY = tsu2.id
+		
+  </select>
+  <select id="queryDefaultFunction" resultType="string">
+  	select
+  		funcid
+  	from 
+  		TB_SYSTEM_ROLE_FUNCTION
+  	where
+  		roleid = #{roleid}
+  </select>
+  <resultMap type="com.zhidi.crm.system.entity.vo.TreeVo" id="treevo">
+  	<id property="id" column="id"/>
+  	<result property="text" column="funcname"/>
+  </resultMap>
+  <select id="findCombotree" resultMap="treevo" parameterType="string">
+	select 
+		id,
+		funcname
+	from
+		TB_SYSTEM_FUNCTION
+	where 
+		parentid 
+	<choose>
+		<when test="_parameter != null">
+			= #{_parameter,jdbcType=VARCHAR}
+		</when>
+		<otherwise>
+			is null
+		</otherwise>
+	</choose>
+  </select>
+  <select id="findTreecount" resultType="integer" parameterType="string">
+  	select 
+		count(1)
+	from
+		TB_SYSTEM_FUNCTION
+	where 
+		parentid 
+	<choose>
+		<when test="_parameter != null">
+			= #{_parameter,jdbcType=VARCHAR}
+		</when>
+		<otherwise>
+			is null
+		</otherwise>
+	</choose>
+  </select>
+  <update id="deleteParentid">
+  	update
+  		TB_SYSTEM_FUNCTION
+  	set 
+  		parentid = null
+  	where
+  		parentid = #{_parameter,jdbcType=VARCHAR}
+  </update>
+  
+  <delete id="deleteFunctionDist">
+  	delete from
+  		TB_SYSTEM_ROLE_FUNCTION
+  	where
+  		roleid = #{roleid}
+  </delete>
+  <delete id="removeRoleFunction">
+  	delete from
+  		TB_SYSTEM_ROLE_FUNCTION
+  	where
+  		funcid in 
+  		<foreach collection="funcids" item="funcid" open="(" close=")" separator=",">
+  			#{funcid}
+  		</foreach>
+  </delete>
+  <insert id="insertFunctionDist">
+  	insert into
+  		TB_SYSTEM_ROLE_FUNCTION
+  	(ROLEID,FUNCID) values (#{roleid},#{funcid})
+  </insert>
+  <update id="removeFunction">
+  	update 
+  		TB_SYSTEM_FUNCTION
+  	set
+  		STATUS = 2,
+  		UPDATEBY = #{adminId},
+  		UPDATETIME = #{updateTime}
+  	where
+  		ID in
+	<foreach collection="funcids" item="funcid" open="(" close=")" separator=",">
+		#{funcid}
+  	</foreach>
+  </update>
+   <delete id="deleteFunction">
+  	delete from
+  		TB_SYSTEM_FUNCTION
+  	where
+  		 ID in
+  		 <foreach collection="funcids" item="funcid" open="(" close=")" separator=",">
+  		 	#{funcid}
+  		 </foreach>
+  </delete>
+  <select id="selectChild" resultType="string">
+  	select
+  		id
+  	from
+  		TB_SYSTEM_FUNCTION
+  	where
+  	parentid in
+  		<foreach collection="funcids" item="funcid" open="(" close=")" separator=",">
+  			#{funcid}
+  		</foreach>
+  </select>
+  <select id="getFuncByFuncCode" resultMap="BaseResultMap">
+    select distinct tsf.* from tb_system_function tsf
+    left join tb_system_role_function tsrf on tsf.id=tsrf.funcid
+    left join tb_system_role tsr on tsrf.roleid=tsr.id
+    left join tb_system_user_role tsur on tsr.id=tsur.roleid
+    where tsf.functype=0 and tsur.userid=#{userId} and tsf.funccode=#{funcCode}
+  </select>
+</mapper>

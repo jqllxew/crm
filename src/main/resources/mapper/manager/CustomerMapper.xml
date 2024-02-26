@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhidi.crm.manager.mapper.CustomerMapper">
+	<resultMap id="BaseResultMap" type="com.zhidi.crm.manager.entity.Customer">
+		<id column="CUSTOMERID" jdbcType="VARCHAR" property="customerid" />
+		<result column="OWNERUSERID" jdbcType="VARCHAR" property="owneruserid" />
+		<result column="CREATORUSERID" jdbcType="VARCHAR" property="creatoruserid" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="ORIGIN" jdbcType="VARCHAR" property="origin" />
+		<result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+		<result column="ZIPCODE" jdbcType="VARCHAR" property="zipcode" />
+		<result column="INDUSTRY" jdbcType="VARCHAR" property="industry" />
+		<result column="ANNUALREVENUE" jdbcType="VARCHAR" property="annualrevenue" />
+		<result column="OWNERSHIP" jdbcType="VARCHAR" property="ownership" />
+		<result column="RATING" jdbcType="VARCHAR" property="rating" />
+		<result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+		<result column="UPDATETIME" jdbcType="TIMESTAMP" property="updatetime" />
+		<result column="ISDELETED" jdbcType="DECIMAL" property="isdeleted" />
+		<result column="ISLOCKED" jdbcType="DECIMAL" property="islocked" />
+		<result column="DELETEUSERID" jdbcType="VARCHAR" property="deleteuserid" />
+		<result column="DELETETIME" property="days" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		CUSTOMERID, OWNERUSERID, CREATORUSERID, NAME, ORIGIN, ADDRESS, ZIPCODE, INDUSTRY,
+		ANNUALREVENUE, OWNERSHIP, RATING, CREATETIME, UPDATETIME, ISDELETED,
+		ISLOCKED, DELETEUSERID,
+		DELETETIME
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from TB_CRM_CUSTOMER
+		where CUSTOMERID = #{customerid,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from TB_CRM_CUSTOMER
+		where CUSTOMERID = #{customerid,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.zhidi.crm.manager.entity.Customer">
+		<selectKey keyProperty="CUSTOMERID" resultType="java.lang.String"
+			order="BEFORE">
+			select sys_guid() from dual
+		</selectKey>
+		insert into TB_CRM_CUSTOMER (CUSTOMERID, OWNERUSERID, CREATORUSERID,
+		NAME, ORIGIN, ADDRESS,
+		ZIPCODE, INDUSTRY, ANNUALREVENUE,
+		OWNERSHIP, RATING, CREATETIME,
+		UPDATETIME, ISDELETED, ISLOCKED,
+		DELETEUSERID, DELETETIME)
+		values (#{customerid,jdbcType=VARCHAR}, #{owneruserid,jdbcType=VARCHAR},
+		#{creatoruserid,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR}, #{origin,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
+		#{zipcode,jdbcType=VARCHAR}, #{industry,jdbcType=VARCHAR},
+		#{annualrevenue,jdbcType=VARCHAR},
+		#{ownership,jdbcType=VARCHAR}, #{rating,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP},
+		#{updatetime,jdbcType=TIMESTAMP}, #{isdeleted,jdbcType=DECIMAL},
+		#{islocked,jdbcType=DECIMAL},
+		#{deleteuserid,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.zhidi.crm.manager.entity.Customer">
+		<selectKey keyProperty="CUSTOMERID" resultType="java.lang.String"
+			order="BEFORE">
+			select sys_guid() from dual
+		</selectKey>
+		insert into TB_CRM_CUSTOMER
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="customerid != null">
+				CUSTOMERID,
+			</if>
+			<if test="owneruserid != null">
+				OWNERUSERID,
+			</if>
+			<if test="creatoruserid != null">
+				CREATORUSERID,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="origin != null">
+				ORIGIN,
+			</if>
+			<if test="address != null">
+				ADDRESS,
+			</if>
+			<if test="zipcode != null">
+				ZIPCODE,
+			</if>
+			<if test="industry != null">
+				INDUSTRY,
+			</if>
+			<if test="annualrevenue != null">
+				ANNUALREVENUE,
+			</if>
+			<if test="ownership != null">
+				OWNERSHIP,
+			</if>
+			<if test="rating != null">
+				RATING,
+			</if>
+			<if test="createtime != null">
+				CREATETIME,
+			</if>
+			<if test="updatetime != null">
+				UPDATETIME,
+			</if>
+			<if test="isdeleted != null">
+				ISDELETED,
+			</if>
+			<if test="islocked != null">
+				ISLOCKED,
+			</if>
+			<if test="deleteuserid != null">
+				DELETEUSERID,
+			</if>
+			<if test="deletetime != null">
+				DELETETIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="customerid != null">
+				#{customerid,jdbcType=VARCHAR},
+			</if>
+			<if test="owneruserid != null">
+				#{owneruserid,jdbcType=VARCHAR},
+			</if>
+			<if test="creatoruserid != null">
+				#{creatoruserid,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="origin != null">
+				#{origin,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="zipcode != null">
+				#{zipcode,jdbcType=VARCHAR},
+			</if>
+			<if test="industry != null">
+				#{industry,jdbcType=VARCHAR},
+			</if>
+			<if test="annualrevenue != null">
+				#{annualrevenue,jdbcType=VARCHAR},
+			</if>
+			<if test="ownership != null">
+				#{ownership,jdbcType=VARCHAR},
+			</if>
+			<if test="rating != null">
+				#{rating,jdbcType=VARCHAR},
+			</if>
+			<if test="createtime != null">
+				#{createtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updatetime != null">
+				#{updatetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isdeleted != null">
+				#{isdeleted,jdbcType=DECIMAL},
+			</if>
+			<if test="islocked != null">
+				#{islocked,jdbcType=DECIMAL},
+			</if>
+			<if test="deleteuserid != null">
+				#{deleteuserid,jdbcType=VARCHAR},
+			</if>
+			<if test="deletetime != null">
+				#{deletetime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.zhidi.crm.manager.entity.Customer">
+		update TB_CRM_CUSTOMER
+		<set>
+			<if test="owneruserid != null">
+				OWNERUSERID = #{owneruserid,jdbcType=VARCHAR},
+			</if>
+			<if test="creatoruserid != null">
+				CREATORUSERID = #{creatoruserid,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="origin != null">
+				ORIGIN = #{origin,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				ADDRESS = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="zipcode != null">
+				ZIPCODE = #{zipcode,jdbcType=VARCHAR},
+			</if>
+			<if test="industry != null">
+				INDUSTRY = #{industry,jdbcType=VARCHAR},
+			</if>
+			<if test="annualrevenue != null">
+				ANNUALREVENUE = #{annualrevenue,jdbcType=VARCHAR},
+			</if>
+			<if test="ownership != null">
+				OWNERSHIP = #{ownership,jdbcType=VARCHAR},
+			</if>
+			<if test="rating != null">
+				RATING = #{rating,jdbcType=VARCHAR},
+			</if>
+			<if test="createtime != null">
+				CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updatetime != null">
+				UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isdeleted != null">
+				ISDELETED = #{isdeleted,jdbcType=DECIMAL},
+			</if>
+			<if test="islocked != null">
+				ISLOCKED = #{islocked,jdbcType=DECIMAL},
+			</if>
+			<if test="deleteuserid != null">
+				DELETEUSERID = #{deleteuserid,jdbcType=VARCHAR},
+			</if>
+			<if test="deletetime != null">
+				DELETETIME = #{deletetime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where CUSTOMERID = #{customerid,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.zhidi.crm.manager.entity.Customer">
+		update TB_CRM_CUSTOMER
+		set OWNERUSERID = #{owneruserid,jdbcType=VARCHAR},
+		CREATORUSERID = #{creatoruserid,jdbcType=VARCHAR},
+		NAME = #{name,jdbcType=VARCHAR},
+		ORIGIN = #{origin,jdbcType=VARCHAR},
+		ADDRESS = #{address,jdbcType=VARCHAR},
+		ZIPCODE = #{zipcode,jdbcType=VARCHAR},
+		INDUSTRY = #{industry,jdbcType=VARCHAR},
+		ANNUALREVENUE = #{annualrevenue,jdbcType=VARCHAR},
+		OWNERSHIP = #{ownership,jdbcType=VARCHAR},
+		RATING = #{rating,jdbcType=VARCHAR},
+		CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+		UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+		ISDELETED = #{isdeleted,jdbcType=DECIMAL},
+		ISLOCKED = #{islocked,jdbcType=DECIMAL},
+		DELETEUSERID = #{deleteuserid,jdbcType=VARCHAR},
+		DELETETIME = #{deletetime,jdbcType=TIMESTAMP}
+		where CUSTOMERID = #{customerid,jdbcType=VARCHAR}
+	</update>
+	<select id="findByPager" resultMap="BaseResultMap">
+		SELECT
+		tcc.customerid,
+		tcc. NAME,
+		tcc.industry,
+		tcc.rating,
+		tcc.address,
+		tsu1.username owneruserid,
+		tsu2.username creatoruserid,
+		tcc.createtime,
+		tcc.updatetime,
+		floor(TIMESTAMPDIFF(SECOND,SYSDATE(),tcc.deletetime)/3600/24) deletetime
+		FROM
+		tb_crm_customer tcc
+		LEFT JOIN tb_system_user tsu1 ON tcc.owneruserid = tsu1.id
+		LEFT JOIN tb_system_user tsu2 ON tcc.creatoruserid = tsu2.id
+		<where>
+		<if test="param != null">
+			<if test="param.name != null and param.name != ''">
+				<bind name="b1" value="'%'+_parameter.param.name+'%'"/>
+				tcc.name like #{b1}
+			</if>
+			<if test="param.address != null and param.address != ''">
+				<bind name="b2" value="'%'+_parameter.param.address+'%'"/>
+				and tcc.address like #{b2}
+			</if>
+			<if test="param.createtime != null">
+				and tcc.createtime &lt; #{param.createtime}
+			</if>
+			<if test="param.industry != null and param.industry != ''">
+				<bind name="b3" value="'%'+_parameter.param.industry+'%'"/>
+				and tcc.industry like #{b3}
+			</if>
+		</if>
+	</where> 
+	limit #{pager.limits},#{pager.rows}
+	</select>
+	<select id="conut" resultType="integer">
+		select
+		count(1)
+		from tb_crm_customer
+		<where>
+		<if test="param != null">
+			<if test="param.name != null and param.name != ''">
+				<bind name="b1" value="'%'+_parameter.param.name+'%'"/>
+				name like #{b1}
+			</if>
+			<if test="param.address != null and param.address != ''">
+				<bind name="b2" value="'%'+_parameter.param.address+'%'"/>
+				and address like #{b2}
+			</if>
+			<if test="param.createtime != null">
+				and createtime &lt; #{param.createtime}
+			</if>
+			<if test="param.industry != null and param.industry != ''">
+				<bind name="b3" value="'%'+_parameter.param.industry+'%'"/>
+				and industry like #{b3}
+			</if>
+		</if>
+	</where>
+	</select>
+	<select id="findfollow" resultType="integer">
+		select count(1) from tb_mid_customer_user where customerid = #{customerId} and userid = #{userId}
+	</select>
+</mapper>
