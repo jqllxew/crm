@@ -27,7 +27,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<Employee> implements Em
 	public Pager<Employee> selectByPager(Pager<Employee> pager, Map<String, Object> params) {
 		log.info("++++++++++++++++++++分页查询++++++++++++++++++++");
 		pager.setTotalRows(mapper.count(params));
-		pager.setData(mapper.selectByPager(pager,(pager.getPage()-1)*pager.getRows(), pager.getRows(),params));
+		pager.setData(mapper.selectByPager(pager, params));
 		return pager;
 	}
 	@Override

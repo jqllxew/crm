@@ -19,10 +19,8 @@ public interface EmployeeMapper extends IBaseMapper<Employee> {
 	 * @param pager 分页查询条件
 	 * @return 分页数据
 	 */
-	List<Employee> selectByPager(@Param("pager")Pager pager,
-			@Param("firstResult")Integer firstResult,
-			@Param("maxResult")Integer maxResult,
-			@Param("params") Map<String, Object> params);
+	List<Employee> selectByPager(@Param("pager")Pager<Employee> pager,
+								 @Param("params") Map<String, Object> params);
 	/**
 	 * 删除emp
 	 * @param empids

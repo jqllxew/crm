@@ -33,9 +33,7 @@ public interface RoleMapper extends IBaseMapper<Role> {
 	 * @param pager
 	 * @return
 	 */
-	List<RoleVo> findByPage(@Param("pager")Pager<RoleVo> pager,
-			@Param("firstResult") Integer firstResult,
-			@Param("maxResult") Integer maxResult);
+	List<RoleVo> findByPage(@Param("pager")Pager<RoleVo> pager);
 	
 	/**
 	 * 查询角色默认值

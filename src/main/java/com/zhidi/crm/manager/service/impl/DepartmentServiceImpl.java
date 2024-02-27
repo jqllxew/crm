@@ -25,7 +25,7 @@ public class DepartmentServiceImpl extends BaseServiceImpl<Department> implement
 	@Override
 	public Pager<DepartmentVo> selectByDeptPage(Pager<DepartmentVo> pager, Map<String, Object> params) {
 		pager.setTotalRows(mapper.count(params));
-		pager.setData(mapper.selectByDeptPage(pager,(pager.getPage()-1)*pager.getRows(), pager.getRows(),params));
+		pager.setData(mapper.selectByDeptPage(pager,params));
 		return pager;
 	}
 	@Override

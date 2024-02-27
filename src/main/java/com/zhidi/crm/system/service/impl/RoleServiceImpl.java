@@ -49,7 +49,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements IRoleServi
 	@Override
 	public Pager<RoleVo> findByPage(Pager<RoleVo> pager) {
 		pager.setTotalRows(mapper.getCount());
-		pager.setData(mapper.findByPage(pager,(pager.getPage()-1)*pager.getRows(),pager.getRows()));
+		pager.setData(mapper.findByPage(pager));
 		return pager;
 	}
 	@Override

@@ -11,7 +11,7 @@
  Target Server Version : 80020
  File Encoding         : 65001
 
- Date: 27/02/2024 03:44:55
+ Date: 27/02/2024 15:00:32
 */
 
 SET NAMES utf8mb4;
@@ -483,6 +483,7 @@ CREATE TABLE `tb_crm_login_history`  (
 -- ----------------------------
 -- Records of tb_crm_login_history
 -- ----------------------------
+INSERT INTO `tb_crm_login_history` VALUES ('00279b27d53711ee852888a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-27 14:11:09.747000', '0:0:0:0:0:0:0:1', '正常');
 INSERT INTO `tb_crm_login_history` VALUES ('008d3e27d0d611ee981388a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-22 00:26:44.588000', '0:0:0:0:0:0:0:1', '正常');
 INSERT INTO `tb_crm_login_history` VALUES ('0113119dd41011eea03d88a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-26 02:59:29.764000', '0:0:0:0:0:0:0:1', '正常');
 INSERT INTO `tb_crm_login_history` VALUES ('031a9907d3d911eea03d88a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-25 20:25:50.849000', '0:0:0:0:0:0:0:1', '正常');
@@ -498,6 +499,7 @@ INSERT INTO `tb_crm_login_history` VALUES ('2a58fe7dd3dd11eea03d88a4c297e0b0', '
 INSERT INTO `tb_crm_login_history` VALUES ('2ae67b9cd0c111ee981388a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-21 21:57:36.206000', '0:0:0:0:0:0:0:1', '正常');
 INSERT INTO `tb_crm_login_history` VALUES ('2fdd6aa7d0d411ee981388a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-22 00:13:44.974000', '0:0:0:0:0:0:0:1', '正常');
 INSERT INTO `tb_crm_login_history` VALUES ('33c18a08d3d911eea03d88a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-25 20:27:12.473000', '0:0:0:0:0:0:0:1', '正常');
+INSERT INTO `tb_crm_login_history` VALUES ('340d9989d53b11ee852888a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-27 14:41:14.814000', '0:0:0:0:0:0:0:1', '正常');
 INSERT INTO `tb_crm_login_history` VALUES ('3a002a72d0b011ee981388a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-21 19:56:20.096000', '0:0:0:0:0:0:0:1', '正常');
 INSERT INTO `tb_crm_login_history` VALUES ('3a54be2fd0d911ee981388a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-22 00:49:50.017000', '0:0:0:0:0:0:0:1', '正常');
 INSERT INTO `tb_crm_login_history` VALUES ('3f0e88e8d41011eea03d88a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-26 03:01:13.753000', '0:0:0:0:0:0:0:1', '正常');
@@ -506,6 +508,7 @@ INSERT INTO `tb_crm_login_history` VALUES ('47c6bbbdd0d611ee981388a4c297e0b0', '
 INSERT INTO `tb_crm_login_history` VALUES ('4b577260d0c711ee981388a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-21 22:41:27.614000', '0:0:0:0:0:0:0:1', '正常');
 INSERT INTO `tb_crm_login_history` VALUES ('4e7223ded0d211ee981388a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-22 00:00:17.287000', '0:0:0:0:0:0:0:1', '正常');
 INSERT INTO `tb_crm_login_history` VALUES ('5048d670d0d011ee981388a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-21 23:46:01.378000', '0:0:0:0:0:0:0:1', '正常');
+INSERT INTO `tb_crm_login_history` VALUES ('514ab81fd4e711eea12c88a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-27 04:40:46.144000', '0:0:0:0:0:0:0:1', '正常');
 INSERT INTO `tb_crm_login_history` VALUES ('597db077d0c611ee981388a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-21 22:34:41.856000', '0:0:0:0:0:0:0:1', '正常');
 INSERT INTO `tb_crm_login_history` VALUES ('5b881d58d41011eea03d88a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-26 03:02:01.526000', '0:0:0:0:0:0:0:1', '正常');
 INSERT INTO `tb_crm_login_history` VALUES ('63766ef3d3d611eea03d88a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-25 20:07:04.021000', '0:0:0:0:0:0:0:1', '正常');
@@ -513,12 +516,15 @@ INSERT INTO `tb_crm_login_history` VALUES ('64312824d3db11eea03d88a4c297e0b0', '
 INSERT INTO `tb_crm_login_history` VALUES ('6c9a6318d0c211ee981388a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-21 22:06:35.934000', '0:0:0:0:0:0:0:1', '正常');
 INSERT INTO `tb_crm_login_history` VALUES ('75a62e80d3d511eea03d88a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-25 20:00:25.037000', '0:0:0:0:0:0:0:1', '正常');
 INSERT INTO `tb_crm_login_history` VALUES ('8a645bdbd0b011ee981388a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-21 19:58:34.970000', '0:0:0:0:0:0:0:1', '正常');
+INSERT INTO `tb_crm_login_history` VALUES ('8f9d74b0d53d11ee852888a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-27 14:58:07.423000', '0:0:0:0:0:0:0:1', '正常');
 INSERT INTO `tb_crm_login_history` VALUES ('9834100ad3d611eea03d88a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-25 20:08:32.506000', '0:0:0:0:0:0:0:1', '正常');
+INSERT INTO `tb_crm_login_history` VALUES ('9ac3aefbd53b11ee852888a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-27 14:44:07.135000', '0:0:0:0:0:0:0:1', '正常');
 INSERT INTO `tb_crm_login_history` VALUES ('9e6da2aad3dd11eea03d88a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-25 20:58:49.427000', '0:0:0:0:0:0:0:1', '正常');
 INSERT INTO `tb_crm_login_history` VALUES ('a51fd585d0c211ee981388a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-21 22:08:10.761000', '0:0:0:0:0:0:0:1', '正常');
 INSERT INTO `tb_crm_login_history` VALUES ('a993eef5d3d711eea03d88a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-25 20:16:11.152000', '0:0:0:0:0:0:0:1', '正常');
 INSERT INTO `tb_crm_login_history` VALUES ('abab1670d3de11eea03d88a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-25 21:06:21.137000', '0:0:0:0:0:0:0:1', '正常');
 INSERT INTO `tb_crm_login_history` VALUES ('b13811bed0d811ee981388a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-22 00:45:59.981000', '0:0:0:0:0:0:0:1', '正常');
+INSERT INTO `tb_crm_login_history` VALUES ('c2fc37c6d53b11ee852888a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-27 14:45:14.615000', '0:0:0:0:0:0:0:1', '正常');
 INSERT INTO `tb_crm_login_history` VALUES ('c3d552f7d3d411eea03d88a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-25 19:55:26.702000', '0:0:0:0:0:0:0:1', '正常');
 INSERT INTO `tb_crm_login_history` VALUES ('ca71f197d3e511eea03d88a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-25 21:57:19.249000', '0:0:0:0:0:0:0:1', '正常');
 INSERT INTO `tb_crm_login_history` VALUES ('cf1bdda5d0af11ee981388a4c297e0b0', '40288a885cedc960015cedc965cc0000', '2024-02-21 19:53:20.751000', '0:0:0:0:0:0:0:1', '正常');
@@ -960,8 +966,11 @@ INSERT INTO `tb_system_function` VALUES ('40288a885d0b5f0b015d0b5fc0a20000', '20
 INSERT INTO `tb_system_function` VALUES ('40288a905d2c5312015d2c5758bc0000', '2010-07-17 07:51:48.000000', 'message', '站内信', '1', 1, 'system/message/MessageAction_list.action', NULL, NULL, 1, 1, '2011-07-17 00:06:48.000000', '40288a885cedc960015cedc965cc0000', '40288a885cee20f8015cee20fdd60000', '40288a885cedc960015cedc965cc0000');
 INSERT INTO `tb_system_function` VALUES ('46082ff0d40311eea03d88a4c297e0b0', '2024-02-26 01:28:21.998000', 'deptdel', '删除部门', '', 0, '', NULL, NULL, 0, 1, NULL, '40288a885cedc960015cedc965cc0000', 'bdd073d8874b4c478bd2d9e847c1a55b', NULL);
 INSERT INTO `tb_system_function` VALUES ('55dd05dcd40311eea03d88a4c297e0b0', '2024-02-26 01:28:48.559000', 'deptedit', '修改部门', '', 0, '', NULL, NULL, 0, 1, NULL, '40288a885cedc960015cedc965cc0000', 'bdd073d8874b4c478bd2d9e847c1a55b', NULL);
+INSERT INTO `tb_system_function` VALUES ('6ae30e2ed53b11ee852888a4c297e0b0', '2024-02-27 14:42:46.810000', 'empadd', '新增员工', '', 0, '', NULL, NULL, 0, 1, NULL, '40288a885cedc960015cedc965cc0000', '4022854fa8fsafhdaaiuhfada2120001dsf', NULL);
 INSERT INTO `tb_system_function` VALUES ('73750e65d3de11eea03d88a4c297e0b0', '2024-02-25 21:04:46.830000', 'dictadd', '新增字典', '', 0, '', NULL, NULL, 0, 1, NULL, '40288a885cedc960015cedc965cc0000', '40288a885cee22d8015cee22de850000', NULL);
+INSERT INTO `tb_system_function` VALUES ('7d5d31e7d53b11ee852888a4c297e0b0', '2024-02-27 14:43:17.809000', 'empremove', '删除员工', '', 0, '', NULL, NULL, 0, 1, NULL, '40288a885cedc960015cedc965cc0000', '4022854fa8fsafhdaaiuhfada2120001dsf', NULL);
 INSERT INTO `tb_system_function` VALUES ('80412490d3de11eea03d88a4c297e0b0', '2024-02-25 21:05:08.300000', 'dictdel', '删除字典', '', 0, '', NULL, NULL, 0, 1, NULL, '40288a885cedc960015cedc965cc0000', '40288a885cee22d8015cee22de850000', NULL);
+INSERT INTO `tb_system_function` VALUES ('8fa6967dd53b11ee852888a4c297e0b0', '2024-02-27 14:43:48.490000', 'empedit', '修改员工', '', 0, '', NULL, NULL, 0, 1, NULL, '40288a885cedc960015cedc965cc0000', '4022854fa8fsafhdaaiuhfada2120001dsf', NULL);
 INSERT INTO `tb_system_function` VALUES ('95e1ef0cd3d811eea03d88a4c297e0b0', '2024-02-25 20:22:47.606000', 'roleremove', '删除角色', '', 0, '', NULL, NULL, 0, 1, NULL, '40288a885cedc960015cedc965cc0000', '40288a885cee221e015cee2223580000', NULL);
 INSERT INTO `tb_system_function` VALUES ('99fe25a6d3de11eea03d88a4c297e0b0', '2024-02-25 21:05:51.482000', 'dictedit', '修改字典', '', 0, '', NULL, NULL, 0, 1, NULL, '40288a885cedc960015cedc965cc0000', '40288a885cee22d8015cee22de850000', NULL);
 INSERT INTO `tb_system_function` VALUES ('a6442711d3d811eea03d88a4c297e0b0', '2024-02-25 20:23:15.093000', 'roleedit', '修改角色', '', 0, '', NULL, NULL, 0, 1, '2024-02-25 20:42:09.027000', '40288a885cedc960015cedc965cc0000', '40288a885cee221e015cee2223580000', '40288a885cedc960015cedc965cc0000');
@@ -1011,7 +1020,7 @@ INSERT INTO `tb_system_role` VALUES ('40288a7c5d3f85dc015d3f8773330000', '2014-0
 INSERT INTO `tb_system_role` VALUES ('40288a7c5d3f85dc015d3f8a6cb60002', '2014-07-17 01:20:22.000000', '权限管理员', '负责管理权限', 2, 1, NULL, '40288a885cedc960015cedc965cc0000', NULL);
 INSERT INTO `tb_system_role` VALUES ('40288a7c5d3f85dc015d3f9072420004', '2014-07-17 01:26:57.000000', '用户管理员', '可以管理用户的角色', 1, 1, '2014-07-17 01:27:23.000000', '40288a885cedc960015cedc965cc0000', '40288a885cedc960015cedc965cc0000');
 INSERT INTO `tb_system_role` VALUES ('40288a7c5d3f85dc015d3f9571870007', '2014-07-17 01:32:24.000000', '角色管理员', '可以管理角色', 1, 1, NULL, '40288a885cedc960015cedc965cc0000', NULL);
-INSERT INTO `tb_system_role` VALUES ('40288a885cedd2a1015cedd2a6870000', '2028-06-17 04:30:24.000000', '超级管理员', '权限最大，能进行系统管理和组织管理', 0, 1, '2024-02-26 03:02:19.079000', NULL, '40288a885cedc960015cedc965cc0000');
+INSERT INTO `tb_system_role` VALUES ('40288a885cedd2a1015cedd2a6870000', '2028-06-17 04:30:24.000000', '超级管理员', '权限最大，能进行系统管理和组织管理', 0, 1, '2024-02-27 14:44:02.143000', NULL, '40288a885cedc960015cedc965cc0000');
 INSERT INTO `tb_system_role` VALUES ('40288a885cfc3c29015cfc3c30fe0000', '2001-07-17 11:40:21.000000', '销售经理', '销售经理可以管理线索、分配任务等权限', 0, 1, '2003-07-17 09:12:05.000000', NULL, NULL);
 
 -- ----------------------------
@@ -1052,7 +1061,10 @@ INSERT INTO `tb_system_role_function` VALUES ('40288a885cedd2a1015cedd2a6870000'
 INSERT INTO `tb_system_role_function` VALUES ('40288a885cedd2a1015cedd2a6870000', '40288a905d2c5312015d2c5758bc0000');
 INSERT INTO `tb_system_role_function` VALUES ('40288a885cedd2a1015cedd2a6870000', '46082ff0d40311eea03d88a4c297e0b0');
 INSERT INTO `tb_system_role_function` VALUES ('40288a885cedd2a1015cedd2a6870000', '55dd05dcd40311eea03d88a4c297e0b0');
+INSERT INTO `tb_system_role_function` VALUES ('40288a885cedd2a1015cedd2a6870000', '6ae30e2ed53b11ee852888a4c297e0b0');
 INSERT INTO `tb_system_role_function` VALUES ('40288a885cedd2a1015cedd2a6870000', '73750e65d3de11eea03d88a4c297e0b0');
+INSERT INTO `tb_system_role_function` VALUES ('40288a885cedd2a1015cedd2a6870000', '7d5d31e7d53b11ee852888a4c297e0b0');
+INSERT INTO `tb_system_role_function` VALUES ('40288a885cedd2a1015cedd2a6870000', '8fa6967dd53b11ee852888a4c297e0b0');
 INSERT INTO `tb_system_role_function` VALUES ('40288a885cedd2a1015cedd2a6870000', '95e1ef0cd3d811eea03d88a4c297e0b0');
 INSERT INTO `tb_system_role_function` VALUES ('40288a885cedd2a1015cedd2a6870000', '99fe25a6d3de11eea03d88a4c297e0b0');
 INSERT INTO `tb_system_role_function` VALUES ('40288a885cedd2a1015cedd2a6870000', 'a6442711d3d811eea03d88a4c297e0b0');

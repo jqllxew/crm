@@ -13,9 +13,7 @@ public interface TaskMapper extends IBaseMapper<Task> {
     int updateByPrimaryKeyWithBLOBs(Task record);
 
     
-    List<Task> findByPage(@Param("pager")Pager<Task> pager,@Param("task")Task task,
-		@Param("firstResult") Integer firstResult,
-		@Param("maxResult") Integer maxResult);
+    List<Task> findByPage(@Param("pager")Pager<Task> pager,@Param("task")Task task);
     
     
     Integer getCount(@Param("task")Task task);

@@ -125,7 +125,7 @@
 	 	</if>
 		   	 </where>
 	      		) pd
-	    limit #{firstResult},#{maxResult}
+	    limit #{pager.limits},#{pager.rows}
   	</select>
   	<select id="selectByData" resultMap="BaseResultMap">
   		select  distinct departmentid,name from TB_CRM_department

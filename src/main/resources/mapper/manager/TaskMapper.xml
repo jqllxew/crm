@@ -358,7 +358,7 @@
   			and date_format(t.duedate, '%Y-%m') = date_format(#{task.duedate},'%Y-%m')
   		</if>
   	</where>
-  	limit #{firstResult},#{maxResult}
+  	limit #{pager.limits},#{pager.rows}
   </select>
   <select id="getColumn" resultType="object">
   	select DISTINCT

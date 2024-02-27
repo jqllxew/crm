@@ -21,12 +21,10 @@ public interface DepartmentMapper extends IBaseMapper<Department> {
 	/**
 	 * 分页
 	 * @param pager
-	 * @param val
+	 * @param params
 	 * @return
 	 */
 	List<DepartmentVo> selectByDeptPage(@Param("pager")Pager<DepartmentVo> pager,
-                                        @Param("firstResult")Integer firstResult,
-                                        @Param("maxResult")Integer maxResult,
                                         @Param("params")Map<String, Object> params);
 	
 	/**

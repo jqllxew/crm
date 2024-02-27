@@ -26,7 +26,7 @@ public class TaskServiceImpl extends BaseServiceImpl<Task> implements ITaskServi
 	@Override
 	public Pager<Task> findByPage(Pager<Task> pager, Task task) {
 		pager.setTotalRows(mapper.getCount(task));
-		pager.setData(mapper.findByPage(pager,task,(pager.getPage()-1)*pager.getRows(),pager.getRows()));
+		pager.setData(mapper.findByPage(pager,task));
 		return pager;
 	}
 

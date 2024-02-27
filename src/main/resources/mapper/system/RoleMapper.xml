@@ -202,7 +202,7 @@
 		TB_SYSTEM_USER tsu2
 		on tsr.UPDATEBY = tsu2.id
 	) r 
-	limit #{firstResult},#{maxResult}
+	limit #{pager.limits},#{pager.rows}
   </select>
   <select id="queryDefault" resultMap="rolevo">
   	select 
